@@ -9,7 +9,7 @@ title:              Identity is Empowering Digital Transformation
 description:        A knowledge base for supporting the Identity.
 
 # Site subpath, e.g. /blog
-baseurl:            "/"
+baseurl:            ""
 
 # Permalink URLs structure, for permalink style options see: https://jekyllrb.com/docs/permalinks/
 permalink:          /:categories/:title:output_ext
