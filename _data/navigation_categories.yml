@@ -5,3 +5,20 @@
     - title: Getting Started
       desc: New to SPGateway? Start here!
       icon: bolt
+
+    - title: Overview
+      desc: Information about common SPGateway functionality, UI, and user experience.
+      icon: list
+
+    - title: Administration
+      desc: References information and how-to guides for most common administration tasks.
+      icon: lock
+
+    - title: Tutorials
+      desc: How-to guides for common application integrations, SPGateway maintenance tasks, and more.
+      icon: laptop
+
+    - title: Troubleshooting
+      desc: Answers to the most common configuration issues, health check recommendations, and more.
+      icon: cog
+

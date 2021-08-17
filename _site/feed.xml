@@ -1,1010 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-17T12:44:50+05:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Identity is Empowering Digital Transformation</title><subtitle>A knowledge base for supporting the Identity.</subtitle><author><name>ICSynergy Staff</name><email>info@icsynergy.com</email></author><entry><title type="html">Installing IdentityRM in Microsoft Azure</title><link href="http://localhost:4000/IdentityRM_azure_ig/" rel="alternate" type="text/html" title="Installing IdentityRM in Microsoft Azure" /><published>2021-01-14T00:00:00+05:30</published><updated>2021-01-14T00:00:00+05:30</updated><id>http://localhost:4000/IdentityRM_azure_ig</id><content type="html" xml:base="http://localhost:4000/IdentityRM_azure_ig/">&lt;div id=&quot;toc&quot; class=&quot;toc&quot;&gt;
-&lt;div id=&quot;toctitle&quot;&gt;Table of Content&lt;/div&gt;
-&lt;ul class=&quot;sectlevel1&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;1. Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#system-requirements&quot;&gt;2. System Requirements&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#preparation-for-installation&quot;&gt;3. Preparation for Installation&lt;/a&gt;
-&lt;ul class=&quot;sectlevel2&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#setting-up-azure-load-balancer&quot;&gt;3.1. Setting up Azure Load Balancer&lt;/a&gt;
-&lt;ul class=&quot;sectlevel3&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#prerequisites&quot;&gt;3.1.1. Prerequisites&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#set-up-azure-load-balancer&quot;&gt;3.1.2. Set up Azure Load Balancer&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#setting-up-azure-vms&quot;&gt;3.2. Setting up Azure VMs&lt;/a&gt;
-&lt;ul class=&quot;sectlevel3&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#prerequisites-2&quot;&gt;3.2.1. Prerequisites&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#set-up-azure-vm&quot;&gt;3.2.2. Set up Azure VM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#connect-to-the-azure-vm-instance&quot;&gt;3.2.3. Connect to the Azure VM Instance&lt;/a&gt;
-&lt;ul class=&quot;sectlevel4&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#before-you-connect&quot;&gt;Before you connect&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#connect-your-virtual-machine&quot;&gt;Connect your Virtual Machine&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#setting-up-postgresql-database&quot;&gt;3.3. Setting up PostgreSQL Database&lt;/a&gt;
-&lt;ul class=&quot;sectlevel3&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#set-up-the-azure-postgressql-server&quot;&gt;3.3.1. Set up the Azure PostgresSQL Server&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#configure-identityrm-to-use-the-azure-postgressql-server&quot;&gt;3.3.2. Configure IdentityRM to use the Azure PostgresSQL Server&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#installing-identityrm&quot;&gt;4. Installing IdentityRM&lt;/a&gt;
-&lt;ul class=&quot;sectlevel2&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#install-docker&quot;&gt;4.1. Install Docker&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#install-identityrm&quot;&gt;4.2. Install IdentityRM&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#configuring-access-to-identityrm&quot;&gt;5. Configuring Access to IdentityRM&lt;/a&gt;
-&lt;ul class=&quot;sectlevel2&quot;&gt;
-&lt;li&gt;&lt;a href=&quot;#set-up-local-environment&quot;&gt;5.1. Set up local environment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#access-identityrm&quot;&gt;5.2. Access IdentityRM&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;#key-configuration-and-log-file-locations&quot;&gt;5.3. Key Configuration and Log file locations&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;introduction&quot;&gt;1. Introduction&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;IdentityRM is a platform that facilitates digital business transformation. IdentityRM provides an evolved thought process where identities belong to relationships, and relationships become the fundamental managed entity.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Relationships allow you to provide business context and macro layer for managing identity within digital business models.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;This guide describes how to install IdentityRM in Microsoft Azure.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;Version tested:&lt;/strong&gt; IdentityRM_1.1-4161&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;system-requirements&quot;&gt;2. System Requirements&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Recommended configurations and sizing:&lt;br&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;div class=&quot;title&quot;&gt;DEV/TEST&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;2 Ubuntu 20.0.02 D2 as v4 instances with 30 GB of storage.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Azure Database for PostgreSQL General Purpose 2 vCore 10 GiB.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Load Balancer for HTTPS between the two Azure VM instances. Set for sticky sessions.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;div class=&quot;title&quot;&gt;PROD&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;2 Ubuntu 20.0.02 D2 as v4 instances with 30 GB of storage&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Azure Database for PostgreSQL Memory Optimized 2 vCore 10 GiB&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Load Balancer for HTTPS between the two Azure VMs.  Set for sticky sessions.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;preparation-for-installation&quot;&gt;3. Preparation for Installation&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Before installing IdentityRM, you need to complete the prerequisites to set up the following:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Azure Load Balancer&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Azure VMs&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;PostgreSQL database&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;setting-up-azure-load-balancer&quot;&gt;3.1. Setting up Azure Load Balancer&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Before installation, you need to have a public Azure Load Balancer ready to load balance your virtual machine.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;For more information about the configurations, see the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-portal?tabs=option-1-create-load-balancer-standard&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Microsoft documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect3&quot;&gt;
-&lt;h4 id=&quot;prerequisites&quot;&gt;3.1.1. Prerequisites&lt;/h4&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Microsoft Azure Portal account&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Microsoft Azure Portal subscription that includes the Azure Load Balancer feature.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect3&quot;&gt;
-&lt;h4 id=&quot;set-up-azure-load-balancer&quot;&gt;3.1.2. Set up Azure Load Balancer&lt;/h4&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The load balancer is attached to the VMs. For information about creating the VM, refer to &lt;a href=&quot;#Configuring Azure VMs&quot;&gt;[Configuring Azure VMs]&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To configure,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Log into &lt;a href=&quot;https://portal.azure.com/#home&quot;&gt;Azure portal&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;In the &lt;strong&gt;Search&lt;/strong&gt; box, type Load Balancer service and select &lt;strong&gt;load balancer&lt;/strong&gt; from the displayed results.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the Load Balancer page, click &lt;strong&gt;New&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Create Load Balancer&lt;/strong&gt; page, enter the details about load balancer.&lt;/p&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../img/config_az_lb_3.png&quot; alt=&quot;Enter Information&quot;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Review the summary and click &lt;strong&gt;Create&lt;/strong&gt; to deploy load balancer.&lt;/p&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../img/config_az_lb_4.png&quot; alt=&quot;config az lb 4&quot;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;A confirmation screen displays successful deployment.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;Go to resource&lt;/strong&gt; to show the configuration of load balancer.&lt;/p&gt;
-&lt;div class=&quot;admonitionblock important&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-important&quot; title=&quot;Important&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-    Make note of the Public IP address to use later when configuring DNS.
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../img/config_az_lb_5.png&quot; alt=&quot;config az lb 5&quot;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click the &lt;strong&gt;Backend Pools&lt;/strong&gt; tab and select &lt;strong&gt;New&lt;/strong&gt; to create a backend server pool.&lt;/p&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../img/config_az_lb_6.png&quot; alt=&quot;config az lb 6&quot;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Enter details about the backend server pool.&lt;/p&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../img/config_az_lb_7.png&quot; alt=&quot;config az lb 7&quot;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click the &lt;strong&gt;Load Balancing Rules&lt;/strong&gt; tab and select &lt;strong&gt;Add&lt;/strong&gt; to create a load balancer rule.&lt;/p&gt;
-&lt;div class=&quot;imageblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;img src=&quot;../img/config_az_lb_8.png&quot; alt=&quot;config az lb 8&quot;&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The load balancer is ready to use. The backend pools are connected to the Azure VMs.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;setting-up-azure-vms&quot;&gt;3.2. Setting up Azure VMs&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You can deploy the IdentityRM solution on two or more of Azure VM instances.
-For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/load-balancer/quickstart-load-balancer-standard-public-portal?tabs=option-1-create-load-balancer-standard&quot;&gt;Microsoft Documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect3&quot;&gt;
-&lt;h4 id=&quot;prerequisites-2&quot;&gt;3.2.1. Prerequisites&lt;/h4&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Microsoft Azure Portal account.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Microsoft Azure Portal subscription that includes the Azure Load Balancer feature.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;A configured Azure Load Balancer.    &lt;br&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;admonitionblock note&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-note&quot; title=&quot;Note&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-You can configure the Load Balancer even after creating the VM, but it works faster when configured before.
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect3&quot;&gt;
-&lt;h4 id=&quot;set-up-azure-vm&quot;&gt;3.2.2. Set up Azure VM&lt;/h4&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Log into &lt;a href=&quot;https://portal.azure.com/#home&quot;&gt;Azure portal&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Search the Virtual Machine service.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;Add &amp;gt; Start with a pre-set configuration&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Select &lt;strong&gt;General purpose D-Series default&lt;/strong&gt; as the Workload type and then click &lt;strong&gt;Continue to Create a VM&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Create A Virtual Machine&lt;/strong&gt; page, perform the following steps:&lt;/p&gt;
-&lt;div class=&quot;olist loweralpha&quot;&gt;
-&lt;ol class=&quot;loweralpha&quot; type=&quot;a&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Basics&lt;/strong&gt; tab, enter required details for all the fields.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Disks&lt;/strong&gt; tab, enter details and select a disk size to create a data disk.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Networking&lt;/strong&gt; tab, configure the network and load balancer.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Review and Create&lt;/strong&gt; tab, review the entered details and click &lt;strong&gt;Create&lt;/strong&gt;.&lt;/p&gt;
-&lt;div class=&quot;admonitionblock note&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-note&quot; title=&quot;Note&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-Click &lt;strong&gt;Previous&lt;/strong&gt; if you need to modify the details.
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The &lt;strong&gt;Generate new key pair&lt;/strong&gt; dialog box is displayed.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;Download private key and create resource&lt;/strong&gt; to save the key for future reference.   &lt;br&gt;
-The message, &lt;strong&gt;Your deployment is complete&lt;/strong&gt; confirms successful deployment of a new virtual machine.&lt;/p&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Now, you need to configure the virtual machine.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the deployment confirmation page, click &lt;strong&gt;Go to Resource&lt;/strong&gt;.    &lt;br&gt;
-The &lt;strong&gt;Overview&lt;/strong&gt; tab displays the complete configuration of the virtual machine.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Copy the IP address.&lt;br&gt;&lt;/p&gt;
-&lt;div class=&quot;admonitionblock important&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-important&quot; title=&quot;Important&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-You need the IP address to connect the VM.
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click the &lt;strong&gt;Networking&lt;/strong&gt; tab and configure the SSH port firewall rule.    &lt;br&gt;
-The VM instance is ready to use. You can create more VMs following the same steps.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect3&quot;&gt;
-&lt;h4 id=&quot;connect-to-the-azure-vm-instance&quot;&gt;3.2.3. Connect to the Azure VM Instance&lt;/h4&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Use the SSH key and an SSH connection tool (For example, PuTTy) or command line SSH to connect to the VM instance. This section describes how to connect the VM using PuTTy. For detailed information, see &lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html#putty-private-key&quot;&gt;Convert your Private key using PuTTYgen&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;Prerequisites&lt;/strong&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Your .pem file.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Conversion of the private key using PuTTYgen.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;The IP Address copied while creating the VM.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect4&quot;&gt;
-&lt;h5 id=&quot;before-you-connect&quot;&gt;Before you connect&lt;/h5&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You need to convert the private key using PuTTYgen.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To convert,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Start PuTTYgen (Click &lt;strong&gt;Start&amp;gt;All Programs&amp;gt;PuTTYgen&lt;/strong&gt;).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Select &lt;strong&gt;RSA&lt;/strong&gt; for &lt;strong&gt;Types of key to generate&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;Load&lt;/strong&gt; and select the &lt;strong&gt;All Files&lt;/strong&gt; option for &lt;strong&gt;Files to select&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Select your .pem file for the key pair that you generated and click &lt;strong&gt;Open&lt;/strong&gt; to import. &lt;br&gt;
-For example, IdentityRMDev1.pem.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;Save private key&lt;/strong&gt;.&lt;br&gt;
-A warning appears.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Select &lt;strong&gt;Yes&lt;/strong&gt; to save the key without a passphrase.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Enter a name for the key and click &lt;strong&gt;Save&lt;/strong&gt;.&lt;br&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&quot;admonitionblock note&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-note&quot; title=&quot;Note&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-The name of key must match with the name of the key pair.
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You have converted the private key to the .ppk file extension that PuTTYgen supports. Now, use the SSH client of PuTTY to connect your VM instance.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect4&quot;&gt;
-&lt;h5 id=&quot;connect-your-virtual-machine&quot;&gt;Connect your Virtual Machine&lt;/h5&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To connect your VM,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Start PuTTYgen (Click &lt;strong&gt;Start&amp;gt;All Programs&amp;gt;PuTTYgen&lt;/strong&gt;).&lt;br&gt;
-The PuTTY Configuration wizard appears.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Session&lt;/strong&gt; screen, enter the IP address of the VM instance and click &lt;strong&gt;Save&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Auth&lt;/strong&gt; screen, &lt;strong&gt;Browse&lt;/strong&gt; and add the PPK file received after converting the private key.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Data&lt;/strong&gt; screen, enter the Azure user login name.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;Open&lt;/strong&gt;.&lt;br&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Access the new host configuration to login.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The VM session starts.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;setting-up-postgresql-database&quot;&gt;3.3. Setting up PostgreSQL Database&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;IdentityRM installs a local PostgresSQL database as part of the installation process. You can modify the configuration to use the Azure PostgresSQL remote database. This section describes how to set up the PostgresSQL database and connect IdentityRM to the available database.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;&lt;strong&gt;Prerequisite&lt;/strong&gt;: Azure subscription.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect3&quot;&gt;
-&lt;h4 id=&quot;set-up-the-azure-postgressql-server&quot;&gt;3.3.1. Set up the Azure PostgresSQL Server&lt;/h4&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You can access the VM instance using the SSH key generated while creating the VM instance, and an SSH connection tool (For example, PuTTY) or command line SSH.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To set up, create an Azure database for PostgresSQL Server and then configure. For detailed information, refer to &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/postgresql/quickstart-create-server-database-portal&quot;&gt;Microsoft documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To configure,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Go to &lt;a href=&quot;https://portal.azure.com/#home&quot;&gt;Azure portal&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Search for and select the PostgresSQL service configuration.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;New+&lt;/strong&gt; to add a new PostgresSQL server.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Select Azure Database for PostgreSQL deployment option&lt;/strong&gt; page, select &lt;strong&gt;Create&lt;/strong&gt; for &lt;strong&gt;Single Server&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;On the &lt;strong&gt;Basics&lt;/strong&gt; tab of Single Server, enter the details and click &lt;strong&gt;Review + create&lt;/strong&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Review the configuration and click &lt;strong&gt;Create&lt;/strong&gt;. &lt;br&gt;
-The following confirmation message appears: &lt;strong&gt;Your deployment is complete&lt;/strong&gt;.&lt;br&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click &lt;strong&gt;Go to Resource&lt;/strong&gt;.    &lt;br&gt;
-View the server details and start configuring.&lt;/p&gt;
-&lt;div class=&quot;admonitionblock important&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-important&quot; title=&quot;Important&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You need to configure to make the server publicly accessible.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click the &lt;strong&gt;Connection Security&lt;/strong&gt; tab.   &lt;br&gt;
-This setting helps to configure firewall rules to access the PostgresSQL server.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;To configure firewall, perform the following steps:&lt;/p&gt;
-&lt;div class=&quot;olist loweralpha&quot;&gt;
-&lt;ol class=&quot;loweralpha&quot; type=&quot;a&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Enter the IP address of the VM instance.&lt;br&gt;&lt;/p&gt;
-&lt;div class=&quot;admonitionblock note&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-note&quot; title=&quot;Note&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-IP address is available in the VM instance configuration overview.
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Enter &lt;strong&gt;Client IP&lt;/strong&gt;.&lt;br&gt;&lt;/p&gt;
-&lt;div class=&quot;admonitionblock note&quot;&gt;
-&lt;table&gt;
-&lt;tr&gt;
-&lt;td class=&quot;icon&quot;&gt;
-&lt;i class=&quot;fa icon-note&quot; title=&quot;Note&quot;&gt;&lt;/i&gt;
-&lt;/td&gt;
-&lt;td class=&quot;content&quot;&gt;
-The Client IP is a local client address for using clients installed on the Desktop, for instance.
-&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Click the &lt;strong&gt;Connection Strings&lt;/strong&gt; tab to show the configuration parameters to be used in IdentityRM.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The PostgresSQL configuration is complete.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect3&quot;&gt;
-&lt;h4 id=&quot;configure-identityrm-to-use-the-azure-postgressql-server&quot;&gt;3.3.2. Configure IdentityRM to use the Azure PostgresSQL Server&lt;/h4&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Configure IdentityRM after installation to connect to the Azure PostgresSQL server.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To configure,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Connect to the VM server using an SSH shell.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Edit the following idaas_manager/.env file and enter related input in the highlighted fields:&lt;/p&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;SQL_ENGINE=django.db.backends.postgresql&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;SQL_DATABASE=&lt;strong&gt;postgres&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;SQL_USER=&lt;strong&gt;postgres@idrmdevpostgres&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;SQL_PASSWORD=&lt;strong&gt;&amp;lt;your_password&amp;gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;SQL_HOST= &lt;strong&gt;idrmdevpostgres.postgres.database.azure.com&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;SQL_PORT=5432&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Restart the server.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;installing-identityrm&quot;&gt;4. Installing IdentityRM&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To install IdentityRM, you need to first install Docker.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;install-docker&quot;&gt;4.1. Install Docker&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To install,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Use the Ubuntu 20.0.02 Azure VM image.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Log into AzureVM using PuTTY.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Install docker and set up as non-root user using the following steps:&lt;/p&gt;
-&lt;div class=&quot;olist loweralpha&quot;&gt;
-&lt;ol class=&quot;loweralpha&quot; type=&quot;a&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;sudo snap install docker&lt;/code&gt; (installs docker and docker-compose).&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;sudo groupadd docker&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;sudo usermod -aG docker $USER&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;sudo chmod 777 /var/run/docker.sock&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Log out and return into Unix shell.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the following to validate that docker is running properly: &lt;code&gt;azureuser@IdentityRM:~/idaas_manager$  docker run hello-world&lt;/code&gt;  &lt;br&gt;
-The following message confirms successful completion:&lt;/p&gt;
-&lt;div class=&quot;literalblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre&gt;    Hello from Docker!
-This message shows that your installation appears to be working correctly.
-To generate this message, Docker took the following steps:
- 1. The Docker client contacted the Docker daemon.
- 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
-    (amd64)
- 3. The Docker daemon created a new container from that image which runs the
-    executable that produces the output you are currently reading.
- 4. The Docker daemon streamed that output to the Docker client, which sent it
-    to your terminal.
-To try something more ambitious, you can run an Ubuntu container with:
- $ docker run -it ubuntu bash
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;sudo apt install unzip&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;install-identityrm&quot;&gt;4.2. Install IdentityRM&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To install,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Unzip the release file. &lt;code&gt;unzip IdentityRM*.zip&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run the installation command.&lt;/p&gt;
-&lt;div class=&quot;literalblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre&gt;cd idaas_manager
-make install&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Output
-azureuser@IdentityRM:~$ cd idaas_manager/
-azureuser@IdentityRM:~/idaas_manager$ make install
-Installing docker images...
-77cae8ab23bf: Loading layer  5.815MB/5.815MB
-766d031fa954: Loading layer   2.56kB/2.56kB
-db3a903780ba: Loading layer  1.536kB/1.536kB
-01418db173bb: Loading layer  70.98MB/70.98MB
-760ddfacf422: Loading layer  30.21kB/30.21kB
-e4f3e630426a: Loading layer  2.048kB/2.048kB
-1b5ae6d491ae: Loading layer  3.072kB/3.072kB
-dde7cc167531: Loading layer  8.704kB/8.704kB
-Loaded image: identity_rm_db_prod:latest
-f1b5933fe4b5: Loading layer  5.796MB/5.796MB
-fbe0fc9bcf95: Loading layer  17.86MB/17.86MB
-6e3177938916: Loading layer  32.35MB/32.35MB
-2c01af858ac4: Loading layer  3.072kB/3.072kB
-a54f56ad01ba: Loading layer   12.8kB/12.8kB
-112ba21ea5bb: Loading layer  3.072kB/3.072kB
-73de2bbf029e: Loading layer  1.319MB/1.319MB
-4128c9e3485c: Loading layer  11.66MB/11.66MB
-c4313026eb26: Loading layer  1.602MB/1.602MB
-99f2b2e2dff5: Loading layer  903.7kB/903.7kB
-Loaded image: nginx_prod:latest
-b2d5eeeaba3a: Loading layer   5.88MB/5.88MB
-d2c4a6adc529: Loading layer  12.29kB/12.29kB
-33292fe7ceb9: Loading layer  2.139MB/2.139MB
-845cc97e6c8b: Loading layer  25.47MB/25.47MB
-c432e6f541e7: Loading layer  2.048kB/2.048kB
-f3286249f0c5: Loading layer  3.584kB/3.584kB
-Loaded image: redis:alpine
-8803ef42039d: Loading layer  119.2MB/119.2MB
-c2c789d2d3c5: Loading layer   17.1MB/17.1MB
-527ade4639e0: Loading layer  17.85MB/17.85MB
-2e5b4ca91984: Loading layer    150MB/150MB
-da9418a2e1b1: Loading layer  520.4MB/520.4MB
-98d95bdfa037: Loading layer  18.49MB/18.49MB
-0d77d4546954: Loading layer  106.6MB/106.6MB
-7a8a38bf5538: Loading layer  4.608kB/4.608kB
-ccbefb30278f: Loading layer  6.996MB/6.996MB
-58b416e5ba92: Loading layer  10.97MB/10.97MB
-5806931a6d90: Loading layer  387.9MB/387.9MB
-e310f70f1efa: Loading layer  3.072kB/3.072kB
-57f75c964d98: Loading layer  745.9MB/745.9MB
-a8bb298967a2: Loading layer   2.56kB/2.56kB
-bf8b9eb818d8: Loading layer  525.3kB/525.3kB
-1a6aeb12327d: Loading layer   2.56kB/2.56kB
-cdbfa6641b6a: Loading layer  50.69kB/50.69kB
-a9c491a4d7b8: Loading layer  3.072kB/3.072kB
-8cafbe6ac6f0: Loading layer  3.584kB/3.584kB
-5a2aeb108b3c: Loading layer  487.8MB/487.8MB
-650fb0b48dba: Loading layer  2.048kB/2.048kB
-a185a502371d: Loading layer   2.56kB/2.56kB
-eac5e8977635: Loading layer  1.371MB/1.371MB
-e5be8ead428f: Loading layer   5.35MB/5.35MB
-27375b1cf211: Loading layer  35.07MB/35.07MB
-43d93b418363: Loading layer  31.24MB/31.24MB
-cd7ec32ab4f1: Loading layer  66.28MB/66.28MB
-Loaded image: identity_rm_web_prod:latest
-Images successfully installed
-Installation successfull!&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You can now run the application.
-For more information, refer to &lt;code&gt;README.md&lt;/code&gt; from the related Git repository.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Set up application&lt;/p&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To set up,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist loweralpha&quot;&gt;
-&lt;ol class=&quot;loweralpha&quot; type=&quot;a&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Perform the following steps:&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;make up&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;make collectstatic&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Select &lt;strong&gt;yes&lt;/strong&gt; to answer the prompt.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Run &lt;code&gt;make import_config&lt;/code&gt;&lt;br&gt;
-&lt;code&gt;import_file=sample_configurations/delegated_admin_tenant_current.json&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&quot;listingblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Output
-azureuser@IdentityRM:~/idaas_manager$ make import_config import_file=sample_configurations/delegated_admin_tenant_current.json
-identity_rm_db_prod is up-to-date
-redis_prod is up-to-date
-identity_rm_web_prod is up-to-date
-nginx_prod is up-to-date
-Migrations for 'core':
-  core/migrations/0003_auto_20210527_1524.py
-    - Alter field theme on dashboardservice
-Operations to perform:
-  Apply all migrations: admin, admin_interface, administration, api, auth, authtoken, contenttypes, core, dashboard, entitlements, frontend, guardian, helpdesk, logs, organization, report_builder, reports, sessions, silk, teams, thycotic, viewflow, workflow
-Running migrations:
-  Applying contenttypes.0001_initial... OK
-  Applying contenttypes.0002_remove_content_type_name... OK
-  Applying core.0001_initial... OK
-  Applying admin.0001_initial... OK
-  Applying admin.0002_logentry_remove_auto_add... OK
-  Applying admin.0003_logentry_add_action_flag_choices... OK
-  Applying admin_interface.0001_initial... OK
-  Applying admin_interface.0002_add_related_modal... OK
-  Applying admin_interface.0003_add_logo_color... OK
-  Applying admin_interface.0004_rename_title_color... OK
-  Applying admin_interface.0005_add_recent_actions_visible... OK
-  Applying admin_interface.0006_bytes_to_str... OK
-  Applying admin_interface.0007_add_favicon... OK
-  Applying admin_interface.0008_change_related_modal_background_opacity_type... OK
-  Applying admin_interface.0009_add_enviroment... OK
-  Applying admin_interface.0010_add_localization... OK
-  Applying admin_interface.0011_add_environment_options... OK
-  Applying admin_interface.0012_update_verbose_names... OK
-  Applying admin_interface.0013_add_related_modal_close_button... OK
-  Applying admin_interface.0014_name_unique... OK
-  Applying admin_interface.0015_add_language_chooser_active... OK
-  Applying admin_interface.0016_add_language_chooser_display... OK
-  Applying admin_interface.0017_change_list_filter_dropdown... OK
-  Applying admin_interface.0018_theme_list_filter_sticky... OK
-  Applying viewflow.0001_initial... OK
-  Applying viewflow.0002_fsmchange... OK
-  Applying viewflow.0003_task_owner_permission_change... OK
-  Applying viewflow.0004_extend_fields_length... OK
-  Applying viewflow.0005_rename_flowcls... OK
-  Applying viewflow.0004_subprocess... OK
-  Applying viewflow.0005_merge... OK
-  Applying viewflow.0006_merge... OK
-  Applying viewflow.0007_owner_permission_obj... OK
-  Applying viewflow.0006_i18n... OK
-  Applying viewflow.0008_merge... OK
-  Applying viewflow.0007_task_assigned... OK
-  Applying viewflow.0008_jsonfield_and_artifact... OK
-  Applying viewflow.0009_merge... OK
-  Applying workflow.0001_initial... OK
-  Applying administration.0001_initial... OK
-  Applying authtoken.0001_initial... OK
-  Applying authtoken.0002_auto_20160226_1747... OK
-  Applying authtoken.0003_tokenproxy... OK
-  Applying api.0001_initial... OK
-  Applying api.0002_auto_20210524_1205... OK
-  Applying auth.0001_initial... OK
-  Applying auth.0002_alter_permission_name_max_length... OK
-  Applying auth.0003_alter_user_email_max_length... OK
-  Applying auth.0004_alter_user_username_opts... OK
-  Applying auth.0005_alter_user_last_login_null... OK
-  Applying auth.0006_require_contenttypes_0002... OK
-  Applying auth.0007_alter_validators_add_error_messages... OK
-  Applying auth.0008_alter_user_username_max_length... OK
-  Applying auth.0009_alter_user_last_name_max_length... OK
-  Applying auth.0010_alter_group_name_max_length... OK
-  Applying auth.0011_update_proxy_permissions... OK
-  Applying auth.0012_alter_user_first_name_max_length... OK
-  Applying organization.0001_initial... OK
-  Applying helpdesk.0001_initial... OK
-  Applying entitlements.0001_initial... OK
-  Applying core.0002_auto_20210524_1205... OK
-  Applying core.0003_auto_20210527_1524... OK
-  Applying dashboard.0001_initial... OK
-  Applying frontend.0001_initial... OK
-  Applying frontend.0002_i18n... OK
-  Applying guardian.0001_initial... OK
-  Applying guardian.0002_generic_permissions_index... OK
-  Applying logs.0001_initial... OK
-  Applying report_builder.0001_initial... OK
-  Applying report_builder.0002_auto_20150201_1809... OK
-  Applying report_builder.0003_auto_20150720_1549... OK
-  Applying report_builder.0004_auto_20170915_2046... OK
-  Applying report_builder.0005_add_delta_filtering... OK
-  Applying report_builder.0006_auto_20180413_0747... OK
-  Applying report_builder.0007_auto_20190214_1405... OK
-  Applying reports.0001_initial... OK
-  Applying sessions.0001_initial... OK
-  Applying silk.0001_initial... OK
-  Applying silk.0002_auto_update_uuid4_id_field... OK
-  Applying silk.0003_request_prof_file... OK
-  Applying silk.0004_request_prof_file_storage... OK
-  Applying sil .0005_increase_request_prof_file_length... OK
-  Applying silk.0006_fix_request_prof_file_blank... OK
-  Applying silk.0007_sqlquery_identifier... OK
-  Applying teams.0001_initial... OK
-  Applying thycotic.0001_initial... OK
-  Applying thycotic.0002_auto_20210524_1205... OK
-Superuser created successfully.
-Importing config file sample_configurations/delegated_admin_tenant_current.json ...
-file imported. Tenant created&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The setup is complete.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect1&quot;&gt;
-&lt;h2 id=&quot;configuring-access-to-identityrm&quot;&gt;5. Configuring Access to IdentityRM&lt;/h2&gt;
-&lt;div class=&quot;sectionbody&quot;&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To configure access to IdentityRM, you need to set up the local environment.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;set-up-local-environment&quot;&gt;5.1. Set up local environment&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To set up your local environment, add the IP address of your VM.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To set up,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;On your local environment, go to the following folder and open the hosts file:&lt;/p&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Windows: C:\Windows\System32\drivers\etc&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Linux: /etc/hosts&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Add the following entries to the hosts file:&lt;/p&gt;
-&lt;div class=&quot;literalblock&quot;&gt;
-&lt;div class=&quot;content&quot;&gt;
-&lt;pre&gt;52.224.164.159 workflowportal.icsynergy.info #local
-52.224.164.159 idrm.icsynergy.info #local&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Replace the IP address with the address of the VM for your local environment (For example, 127.0.0.1).&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;access-identityrm&quot;&gt;5.2. Access IdentityRM&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;You need to configure IdentityRM with the development environment.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;To set up access,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;olist arabic&quot;&gt;
-&lt;ol class=&quot;arabic&quot;&gt;
-&lt;li&gt;
-&lt;p&gt;Open &lt;a href=&quot;https://idrm.icsynergy.info&quot;&gt;IdentityRM Relationship&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Log in using an administrator account for the system.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;sect2&quot;&gt;
-&lt;h3 id=&quot;key-configuration-and-log-file-locations&quot;&gt;5.3. Key Configuration and Log file locations&lt;/h3&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Configure the following files to monitor the application:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;logs/debug.log&lt;/code&gt;: Shows trace logs for the application and displays any errors.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;.env&lt;/code&gt;: Displays information about the environment.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;nginx.conf&lt;/code&gt;: Helps to modify all as the base domain for the application.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;The files are all relative to the base idaas_manager directory.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;paragraph&quot;&gt;
-&lt;p&gt;Other settings are available in the &lt;code&gt;IdentityRM database&lt;/code&gt;. You can configure using the &lt;code&gt;IdentityRM Configuration tools&lt;/code&gt; available at:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&quot;ulist&quot;&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://workflowportal.icsynergy.info/admin&quot; class=&quot;bare&quot;&gt;https://workflowportal.icsynergy.info/admin&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&quot;https://workflowportal.icsynergy.info/dashboard&quot; class=&quot;bare&quot;&gt;https://workflowportal.icsynergy.info/dashboard&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name>Installation Guide</name></author></entry><entry><title type="html">SPGateway Password Policies</title><link href="http://localhost:4000/administration/spgw-admin-password-policies/" rel="alternate" type="text/html" title="SPGateway Password Policies" /><published>2019-04-05T00:00:00+05:30</published><updated>2019-04-05T00:00:00+05:30</updated><id>http://localhost:4000/administration/spgw-admin-password-policies</id><content type="html" xml:base="http://localhost:4000/administration/spgw-admin-password-policies/">&lt;div class=&quot;paragraph&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-08-17T13:57:58+05:30</updated><id>http://localhost:4000/feed.xml</id><title type="html">Identity is Empowering Digital Transformation</title><subtitle>A knowledge base for supporting the Identity.</subtitle><author><name>ICSynergy Staff</name><email>info@icsynergy.com</email></author><entry><title type="html">SPGateway Password Policies</title><link href="http://localhost:4000/administration/spgw-admin-password-policies/" rel="alternate" type="text/html" title="SPGateway Password Policies" /><published>2019-04-05T00:00:00+05:30</published><updated>2019-04-05T00:00:00+05:30</updated><id>http://localhost:4000/administration/spgw-admin-password-policies</id><content type="html" xml:base="http://localhost:4000/administration/spgw-admin-password-policies/">&lt;div class=&quot;paragraph&quot;&gt;
 &lt;p&gt;The SPGateway enforces certain password requirements when changing the password of any user.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&quot;ulist&quot;&gt;
@@ -7091,5 +6085,432 @@ If you do not already have an active session for Oracle IDCS open in your browse
 &lt;h2 id=&quot;configure-the-header-application-settings&quot;&gt;Configure the Header Application Settings&lt;/h2&gt;
 &lt;div class=&quot;sectionbody&quot;&gt;
 
+&lt;/div&gt;
+&lt;/div&gt;</content><author><name>ICSynergy Staff</name><email>info@icsynergy.com</email></author></entry><entry><title type="html">Pre-installation Requirements</title><link href="http://localhost:4000/getting%20started/spgw-gs-preinstall-requirements/" rel="alternate" type="text/html" title="Pre-installation Requirements" /><published>2019-01-14T00:00:00+05:30</published><updated>2019-01-14T00:00:00+05:30</updated><id>http://localhost:4000/getting%20started/spgw-gs-preinstall-requirements</id><content type="html" xml:base="http://localhost:4000/getting%20started/spgw-gs-preinstall-requirements/">&lt;div id=&quot;preamble&quot;&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This section outlines the required information that must be completed prior to installing the SPGateway.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;idp&quot;&gt;IDP&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This section outlines the required information that must be obtained from your IDP instance for the SPGateway installation process.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;IDP Domain Name&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;The IDP domain name is used to connect to your IDP instance to automatically provision applications that are created within the SPGateway Admin UI.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Client ID&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;The Client ID value is used to securely authenticate to your Okta Org.
+      &lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Client Secret&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;The Client Secret value is used to securely authenticate to your Okta Org.&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The IDP domain name is used to connect to your IDP instance to automatically provision applications that are created within the SPGateway Admin UI.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The Client ID and Client Secret values are used to securely authenticate to your Okta Org.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;networking&quot;&gt;Networking&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The SPGateway must be resolvable via DNS and is required to have a hostname assigned in DNS.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Static IP Address&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DNS Server&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;DNS Hostname (FQDN)&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The SPGateway requires a static IP address and does not leverage DHCP.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The SPGateway must be resolvable via a DNS solution that end users leverage. If end users will be originating from the internet, the SPGateway solution must be publicly resolvable. It is recommended that split DNS be leveraged so that internal users connect to an internal IP address and external users connect to a public IP address.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;admonitionblock note&quot;&gt;
+&lt;table&gt;
+&lt;tr&gt;
+&lt;td class=&quot;icon&quot;&gt;
+&lt;i class=&quot;fa icon-note&quot; title=&quot;Note&quot;&gt;&lt;/i&gt;
+&lt;/td&gt;
+&lt;td class=&quot;content&quot;&gt;
+All applications integrated with the SPGateway will be served on the domain that constitutes the FQDN.
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;firewall-rules&quot;&gt;Firewall Rules&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The SPGateway requires networking access to the applications to which it is integrated. Additionally, end users require networking access to the SPGateway on TCP 443 (HTTPS).&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;SPGateway to IDP&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Outbound HTTPS / Port 443, your IDaaS Domain&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;SPGateway to Private ICSynergy Repos&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Outbound HTTPS / Port 443&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;SPGateway to Applications&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Outbound HTTPS / Port 443&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Browser to SPGateway&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Inbound TCP / Port 443&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Management, Configuration Replication&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;TCP 22&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Support Connection&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Outbound TCP 443&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;domain-certificate&quot;&gt;Domain Certificate&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;SPGateway requires a valid web server certificate. Wild card certificates are recommended, but alt-name SSL certificates are also supported. Only one SSL certificate can be used, and an intermediate SSL certificate may be required depending on your certificate authority.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;SSL Certificate for the Domain FQDN&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Wildcard or Alt-Name SSL Certificate&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt; &lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;spgateway-appliance-deployment&quot;&gt;SPGateway Appliance Deployment&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;The SPGateway is designed to be a soft appliance, and ICSynergy will provide you with information that will be used to deploy it. DHCP is required for the initial installation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;appliance-virtual-hardware-specifications&quot;&gt;Appliance Virtual Hardware Specifications&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;This section outlines the suggested virtual hardware specifications allocated for the SPGateway. Each section below details different specifications depending on the use case and requirements for the SPGateway.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;To help with sizing, the following details should be gathered for each protected application, and discussed with an ICSynergy engineer to help determine the proper appliance size.&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Application Name&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Estimated Number of Users Per Day&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Estimated Total Number of Users&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Application Usage&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;i.e., Light / Moderate / Heavy&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;High Availability Required?&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Yes / No&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Disaster Recovery Required?&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Yes / No&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Estimated Average Authentication Requests Per Day&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Estimated Peak Authentication Requests Per Day&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Estimated Average Session Duration&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Is There a Time of Year When Usage Peaks?&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;If yes, when and approximately how many authentications per hour?&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Project User Number Increase&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;on-premise-self-hosted-virtualization&quot;&gt;On-Premise (Self-Hosted Virtualization)&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;POC Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Cores&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;2&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;NIC&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Single 1 Gbps NIC&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Memory&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;4 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Storage&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;20 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Minimal Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Cores&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;2&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;NIC&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Single 1 Gbps NIC&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Memory&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;8 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Storage&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;20 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Medium Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Cores&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;4&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;NIC&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Single 1 Gbps NIC&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Memory&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;8 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Storage&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;40 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Large Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Cores&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;8&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;NIC&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Single 1 Gbps NIC&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Memory&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;16 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Storage&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;40 GB&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;amazon-web-services-aws-instance-sizing&quot;&gt;Amazon Web Services (AWS) Instance Sizing&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;POC Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Instance Type&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;t2.medium&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Minimal Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Instance Type&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;t2.medium&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Medium Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Instance Type&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;m4.large&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Large Installation&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;table class=&quot;tableblock frame-all grid-all stretch&quot;&gt;
+&lt;colgroup&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;col style=&quot;width: 50%;&quot;&gt;
+&lt;/colgroup&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;Instance Type&lt;/p&gt;&lt;/td&gt;
+&lt;td class=&quot;tableblock halign-left valign-top&quot;&gt;&lt;p class=&quot;tableblock&quot;&gt;m4.xlarge&lt;/p&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;spgateway-deployment-in-amazon-web-services-aws&quot;&gt;SPGateway Deployment in Amazon Web Services (AWS)&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If you are installing the SPGateway in Amazon Web Services (AWS), please share your AWS account number with ICSynergy. ICSynergy will share the AWS AMI image with your organization.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;vmware-esxi&quot;&gt;VMware ESXi&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;Please provide your currently supported version of ESXi to ICSynergy. ICSynergy will provide you with a VMware image for your version of ESXi.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sect1&quot;&gt;
+&lt;h2 id=&quot;load-balancer&quot;&gt;Load Balancer&lt;/h2&gt;
+&lt;div class=&quot;sectionbody&quot;&gt;
+&lt;div class=&quot;paragraph&quot;&gt;
+&lt;p&gt;If the SPGateway is being installed in a high-availability configuration, your organization must provide a load balancer. The load balancer can load balance via SNAT or DNAT and should be configured to load balance through a hash on the source port and IP address.&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</content><author><name>ICSynergy Staff</name><email>info@icsynergy.com</email></author></entry></feed>

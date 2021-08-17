@@ -1,4 +1,3 @@
-:sectnums:
 = Installing IdentityRM in Microsoft Azure
 :page-layout: post
 :author: Installation Guide
