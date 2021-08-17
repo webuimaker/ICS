@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Add a Sample App with Okta | Identity is Empowering Digital Transformation</title>
+<meta name="generator" content="Jekyll v3.4.1" />
+<meta property="og:title" content="Add a Sample App with Okta" />
+<meta name="author" content="ICSynergy Staff" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A knowledge base for supporting the Identity." />
+<meta property="og:description" content="A knowledge base for supporting the Identity." />
+<link rel="canonical" href="http://localhost:4000/tutorials/spgw-how-add-sample-header-app-okta/" />
+<meta property="og:url" content="http://localhost:4000/tutorials/spgw-how-add-sample-header-app-okta/" />
+<meta property="og:site_name" content="Identity is Empowering Digital Transformation" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-12-10T00:00:00+05:30" />
+<script type="application/ld+json">
+{"url":"http://localhost:4000/tutorials/spgw-how-add-sample-header-app-okta/","headline":"Add a Sample App with Okta","dateModified":"2018-12-10T00:00:00+05:30","datePublished":"2018-12-10T00:00:00+05:30","description":"A knowledge base for supporting the Identity.","author":{"@type":"Person","name":"ICSynergy Staff"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/tutorials/spgw-how-add-sample-header-app-okta/"},"@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <meta property="og:image" content="http://localhost:4000/assets/posts/"/>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/asciidoc.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.jpg" >
+  <link rel="alternate" type="application/rss+xml" title="Identity is Empowering Digital Transformation" href="/feed.xml">
+  <script src="/assets/js/main.js"></script>
+  
+</head>
+
+    <body>
+
+    
+        <header class="uk-background-secondary">
+    <div data-uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky" class="uk-sticky uk-sticky-fixed" style="position: fixed; top: 0px; width: 1904px;">
+        <nav class="uk-navbar-container uk-light" style="background: #000;">
+            <div class="uk-container">
+    <div data-uk-navbar>
+        <div class="uk-navbar-left">
+
+          <a class="uk-navbar-item uk-logo" href="/">
+
+            
+              
+                <img class="uk-logo-inverse" src="http://localhost:4000/assets/posts/ics.svg" alt="Identity is Empowering Digital Transformation">
+              
+              
+                <img src="http://localhost:4000/assets/posts/ics.svg" alt="Identity is Empowering Digital Transformation">
+              
+            
+
+          </a>
+
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav uk-visible@m">
+                
+                    
+                    
+                    
+                        <li><a href="/" >Help</a></li>
+                    
+                
+                    
+                    
+                    
+                        <li><a href="http://icsynergy.freshdesk.com" target="_blank" >Support</a></li>
+                    
+                
+            </ul>
+
+            
+            <div>
+                <a class="uk-navbar-toggle" data-uk-search-icon href="#"></a>
+                <div class="uk-drop uk-background-default uk-border-rounded" data-uk-drop="mode: click; pos: left-center; offset: 0">
+                    <form class="uk-search uk-search-navbar uk-width-1-1" onsubmit="return false;">
+                        <input id="navbar-search" class="uk-search-input" type="search" placeholder="Search..." autofocus>
+                    </form>
+                    <ul id="navbar-search-results" class="uk-position-absolute uk-width-1-1 uk-list"></ul>
+                </div>
+            </div>
+            <script>
+            SimpleJekyllSearch({
+                searchInput: document.getElementById('navbar-search'),
+                resultsContainer: document.getElementById('navbar-search-results'),
+                noResultsText: '<li>No results found</li>',
+                searchResultTemplate: '<li><a href="{url}">{title}</a></li>',
+                json: '/search.json'
+            });
+            </script>
+            
+
+            <a class="uk-navbar-toggle uk-hidden@m" href="#offcanvas" data-uk-navbar-toggle-icon data-uk-toggle></a>
+
+        </div>
+    </div>
+</div>
+
+        </nav>
+    </div>
+</header>
+
+    
+
+    <main aria-label="Content">
+    <div class="uk-section">
+    <div class="uk-container uk-container-small">
+        <article class="uk-article">
+
+            <h1 class="uk-article-title">Add a Sample App with Okta</h1>
+
+            <div class="share-side uk-visible@m" data-uk-scrollspy="cls: uk-animation-fade; target: .share; repeat: true">
+                <div class="share" data-uk-sticky="offset: 150; bottom: .uk-article-content;"><div class="share">
+    <a href="https://twitter.com/intent/tweet?text=Add a Sample App with Okta&url=http://localhost:4000/tutorials/spgw-how-add-sample-header-app-okta/&via=icsynergy&related=icsynergy" rel="nofollow" target="_blank" title="Share on Twitter" onclick="window.open(this.href, 'twitter', 'width=550,height=235');return false;"><span class="twitter"><svg class="svgIcon-use" width="40" height="40" viewBox="0 0 29 29"><path d="M21.967 11.8c.018 5.93-4.607 11.18-11.177 11.18-2.172 0-4.25-.62-6.047-1.76l-.268.422-.038.5.186.013.168.012c.3.02.44.032.6.046 2.06-.026 3.95-.686 5.49-1.86l1.12-.85-1.4-.048c-1.57-.055-2.92-1.08-3.36-2.51l-.48.146-.05.5c.22.03.48.05.75.08.48-.02.87-.07 1.25-.15l2.33-.49-2.32-.49c-1.68-.35-2.91-1.83-2.91-3.55 0-.05 0-.01-.01.03l-.49-.1-.25.44c.63.36 1.35.57 2.07.58l1.7.04L7.4 13c-.978-.662-1.59-1.79-1.618-3.047a4.08 4.08 0 0 1 .524-1.8l-.825.07a12.188 12.188 0 0 0 8.81 4.515l.59.033-.06-.59v-.02c-.05-.43-.06-.63-.06-.87a3.617 3.617 0 0 1 6.27-2.45l.2.21.28-.06c1.01-.22 1.94-.59 2.73-1.09l-.75-.56c-.1.36-.04.89.12 1.36.23.68.58 1.13 1.17.85l-.21-.45-.42-.27c-.52.8-1.17 1.48-1.92 2L22 11l.016.28c.013.2.014.35 0 .52v.04zm.998.038c.018-.22.017-.417 0-.66l-.498.034.284.41a8.183 8.183 0 0 0 2.2-2.267l.97-1.48-1.6.755c.17-.08.3-.02.34.03a.914.914 0 0 1-.13-.292c-.1-.297-.13-.64-.1-.766l.36-1.254-1.1.695c-.69.438-1.51.764-2.41.963l.48.15a4.574 4.574 0 0 0-3.38-1.484 4.616 4.616 0 0 0-4.61 4.613c0 .29.02.51.08.984l.01.02.5-.06.03-.5c-3.17-.18-6.1-1.7-8.08-4.15l-.48-.56-.36.64c-.39.69-.62 1.48-.65 2.28.04 1.61.81 3.04 2.06 3.88l.3-.92c-.55-.02-1.11-.17-1.6-.45l-.59-.34-.14.67c-.02.08-.02.16 0 .24-.01 2.12 1.55 4.01 3.69 4.46l.1-.49-.1-.49c-.33.07-.67.12-1.03.14-.18-.02-.43-.05-.64-.07l-.76-.09.23.73c.57 1.84 2.29 3.14 4.28 3.21l-.28-.89a8.252 8.252 0 0 1-4.85 1.66c-.12-.01-.26-.02-.56-.05l-.17-.01-.18-.01L2.53 21l1.694 1.07a12.233 12.233 0 0 0 6.58 1.917c7.156 0 12.2-5.73 12.18-12.18l-.002.04z"></path></svg>
+</span></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Ftutorials%2Fspgw-how-add-sample-header-app-okta%2F" rel="nofollow" target="_blank" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><span class="facebook"><svg class="svgIcon-use" width="40" height="40" viewBox="0 0 29 29"><path d="M16.39 23.61v-5.808h1.846a.55.55 0 0 0 .546-.48l.36-2.797a.551.551 0 0 0-.547-.62H16.39V12.67c0-.67.12-.813.828-.813h1.474a.55.55 0 0 0 .55-.55V8.803a.55.55 0 0 0-.477-.545c-.436-.06-1.36-.116-2.22-.116-2.5 0-4.13 1.62-4.13 4.248v1.513H10.56a.551.551 0 0 0-.55.55v2.797c0 .304.248.55.55.55h1.855v5.76c-4.172-.96-7.215-4.7-7.215-9.1 0-5.17 4.17-9.36 9.31-9.36 5.14 0 9.31 4.19 9.31 9.36 0 4.48-3.155 8.27-7.43 9.15M14.51 4C8.76 4 4.1 8.684 4.1 14.46c0 5.162 3.75 9.523 8.778 10.32a.55.55 0 0 0 .637-.543v-6.985a.551.551 0 0 0-.55-.55H11.11v-1.697h1.855a.55.55 0 0 0 .55-.55v-2.063c0-2.02 1.136-3.148 3.03-3.148.567 0 1.156.027 1.597.06v1.453h-.924c-1.363 0-1.93.675-1.93 1.912v1.78c0 .3.247.55.55.55h2.132l-.218 1.69H15.84c-.305 0-.55.24-.55.55v7.02c0 .33.293.59.623.54 5.135-.7 9.007-5.11 9.007-10.36C24.92 8.68 20.26 4 14.51 4"></path></svg>
+</span></a>
+</div>
+
+                  
+<div><p style="font-size:17px;"><strong>Contents</strong></p></div>
+<div class="toc">
+<ul class="sectlevel1">
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#create-the-application-in-spgateway">Create the Application in SPGateway</a></li>
+<li><a href="#configure-the-header-application-settings">Configure the Header Application Settings</a></li>
+<li><a href="#configure-the-header-application-attributes">Configure the Header Application Attributes</a></li>
+<li><a href="#add-a-custom-attribute-to-okta">Add a Custom Attribute to Okta</a></li>
+<li><a href="#complete-the-header-application-configuration">Complete the Header Application Configuration</a></li>
+<li><a href="#test-the-sample-header-application">Test the Sample Header Application</a></li>
+</ul>
+</div>
+
+
+                </div>
+            </div>
+
+            <div class="uk-article-content">
+                <div class="sect1">
+<h2 id="introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The purpose of this tutorial is to walk through the process of setting up a sample header application with Okta through the SPGateway Admin Console.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The following is required:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Admin login for SPGateway Admin console.</p>
+</li>
+<li>
+<p>SPGateway appliance configured with Okta tenant.</p>
+</li>
+<li>
+<p>Access to and ability to modify local hosts file.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="create-the-application-in-spgateway">Create the Application in SPGateway</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to the Admin UI for your SPGateway instance (for example, <a href="https://admin.icsynergy.info" class="bare">https://admin.icsynergy.info</a>).</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+SPGateway creates a default self-signed certificate. For non-production deployments, this will be appropriate. Proceed past any security exceptions raised by your browser. For production deployments, a valid certificate can be installed and these exceptions are not be needed.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-01.png" alt="spgateway sample header app okta 01">
+</div>
+</div>
+</li>
+<li>
+<p>In the <strong>SPGateway Admin Console</strong>, enter your login credentials and click <strong>Login</strong>.</p>
+<div class="listingblock">
+<div class="content">
+<pre>Username: admin
+Password: &lt;default password&gt;</pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-02.png" alt="spgateway sample header app okta 02">
+</div>
+</div>
+</li>
+<li>
+<p>Click the <strong>Applications</strong> tab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-03.png" alt="spgateway sample header app okta 03">
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>+Add</strong> to add a new application.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-04.png" alt="spgateway sample header app okta 04">
+</div>
+</div>
+</li>
+<li>
+<p>Select the <strong>SPGW Sample Header App</strong> option from the left column menu, and click <strong>Create</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-05.png" alt="spgateway sample header app okta 05">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-06.png" alt="spgateway sample header app okta 06">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configure-the-header-application-settings">Configure the Header Application Settings</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click <strong>Next</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Settings page provides options with which to further configure the application. For more information on the application setting options, <a href="http://support.icsynergy.com/knowledge-base/application-settings">Application Settings</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-07.png" alt="spgateway sample header app okta 07">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configure-the-header-application-attributes">Configure the Header Application Attributes</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Click <strong>Next</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The Attributes page provides a list of attributes that will be passed into the application. This page also provides the ability to add, edit, or remove any attribute. For more information on the attribute options, see <a href="http://support.icsynergy.com/knowledge-base/application-attributes/">Application Attributes</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-08.png" alt="spgateway sample header app okta 08">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="add-a-custom-attribute-to-okta">Add a Custom Attribute to Okta</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In a new tab, navigate to your <strong>Okta Org</strong>, log in as an administrator, and click <strong>Admin</strong>.</p>
+</li>
+<li>
+<p>Navigate to the <strong>Directory &#8594; Profile Editor</strong> Section.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-10.png" alt="spgateway sample header app okta 10">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can hover over the main tabs in the Okta admin console to reveal the flyout sub-menus.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Click <strong>Profile</strong> in the <strong>Actions</strong> column.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-11.png" alt="spgateway sample header app okta 11">
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>+ Add Attribute</strong> to add a custom attribute that will be used to send header information through the <strong>Sample Header Application</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-12.png" alt="spgateway sample header app okta 12">
+</div>
+</div>
+</li>
+<li>
+<p>Enter <strong>Gender</strong> for the <strong>Display name</strong> and <strong>gender</strong> for the <strong>Variable name</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-13.png" alt="spgateway sample header app okta 13">
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Directory &#8594; People</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-14.png" alt="spgateway sample header app okta 14">
+</div>
+</div>
+</li>
+<li>
+<p>Select your account under the <strong>Person &amp; Username</strong> column.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-15.png" alt="spgateway sample header app okta 15">
+</div>
+</div>
+</li>
+<li>
+<p>Click the <strong>Profile</strong> tab, and click <strong>Edit</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-16.png" alt="spgateway sample header app okta 16">
+</div>
+</div>
+</li>
+<li>
+<p>Scroll down to the <strong>Gender</strong> attribute, and enter a corresponding value.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-17.png" alt="spgateway sample header app okta 17">
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="complete-the-header-application-configuration">Complete the Header Application Configuration</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Return to the <strong>SPGateway Admin Console</strong>.</p>
+</li>
+<li>
+<p>In the <strong>Attributes</strong> section, hover over the <strong>+</strong> button and click <strong>Session</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-18.png" alt="spgateway sample header app okta 18">
+</div>
+</div>
+</li>
+<li>
+<p>Scroll down to the <strong>Add new Session Attribute</strong> window.</p>
+</li>
+<li>
+<p>In the <strong>Name</strong> field, enter <strong>gender</strong>, and select the <strong>gender</strong> attribute type in the <strong>Value</strong> field.</p>
+</li>
+<li>
+<p>Click <strong>Okay</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-19.png" alt="spgateway sample header app okta 19">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+In the Value menu, type in the name of the attribute you want to add, and then click the new attribute in the dropdown menu.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Click <strong>Next</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-08.png" alt="spgateway sample header app okta 08">
+</div>
+</div>
+</li>
+<li>
+<p>Click <strong>Done</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-20.png" alt="spgateway sample header app okta 20">
+</div>
+</div>
+</li>
+<li>
+<p>Confirm that the <strong>Sample Header App</strong> is displayed as <strong>Active</strong> in the <strong>Protected Applications</strong> list.</p>
+</li>
+<li>
+<p>Click the <strong>Goto App</strong> icon.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-21.png" alt="spgateway sample header app okta 21">
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Ensure that the Public Domain defined in the Configure the Header Application Settings is added to local host file or DNS Server pointing to the VM running SPGateway.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>&lt;ip address&gt;     &lt;app public domain&gt;
+xxx.xxx.xxx.xxx  header.icsynergy.info</pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="test-the-sample-header-application">Test the Sample Header Application</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select <strong>IDP Initiated</strong> from the dropdown menu to verify the application is working.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-22.png" alt="spgateway sample header app okta 22">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you do not already have an active session for Okta open in your browser, you may be prompted to log in to your Okta account and provide your credentials.
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>In the application page, review and verify that the <strong>Sample Header App</strong> sent to Okta match your profile information.</p>
+<div class="imageblock">
+<div class="content">
+<img src="http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgateway-sample-header-app-okta-23.png" alt="spgateway sample header app okta 23">
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+                <div class="share uk-hidden@m uk-text-center uk-margin-large-top"><div class="share">
+    <a href="https://twitter.com/intent/tweet?text=Add a Sample App with Okta&url=http://localhost:4000/tutorials/spgw-how-add-sample-header-app-okta/&via=icsynergy&related=icsynergy" rel="nofollow" target="_blank" title="Share on Twitter" onclick="window.open(this.href, 'twitter', 'width=550,height=235');return false;"><span class="twitter"><svg class="svgIcon-use" width="40" height="40" viewBox="0 0 29 29"><path d="M21.967 11.8c.018 5.93-4.607 11.18-11.177 11.18-2.172 0-4.25-.62-6.047-1.76l-.268.422-.038.5.186.013.168.012c.3.02.44.032.6.046 2.06-.026 3.95-.686 5.49-1.86l1.12-.85-1.4-.048c-1.57-.055-2.92-1.08-3.36-2.51l-.48.146-.05.5c.22.03.48.05.75.08.48-.02.87-.07 1.25-.15l2.33-.49-2.32-.49c-1.68-.35-2.91-1.83-2.91-3.55 0-.05 0-.01-.01.03l-.49-.1-.25.44c.63.36 1.35.57 2.07.58l1.7.04L7.4 13c-.978-.662-1.59-1.79-1.618-3.047a4.08 4.08 0 0 1 .524-1.8l-.825.07a12.188 12.188 0 0 0 8.81 4.515l.59.033-.06-.59v-.02c-.05-.43-.06-.63-.06-.87a3.617 3.617 0 0 1 6.27-2.45l.2.21.28-.06c1.01-.22 1.94-.59 2.73-1.09l-.75-.56c-.1.36-.04.89.12 1.36.23.68.58 1.13 1.17.85l-.21-.45-.42-.27c-.52.8-1.17 1.48-1.92 2L22 11l.016.28c.013.2.014.35 0 .52v.04zm.998.038c.018-.22.017-.417 0-.66l-.498.034.284.41a8.183 8.183 0 0 0 2.2-2.267l.97-1.48-1.6.755c.17-.08.3-.02.34.03a.914.914 0 0 1-.13-.292c-.1-.297-.13-.64-.1-.766l.36-1.254-1.1.695c-.69.438-1.51.764-2.41.963l.48.15a4.574 4.574 0 0 0-3.38-1.484 4.616 4.616 0 0 0-4.61 4.613c0 .29.02.51.08.984l.01.02.5-.06.03-.5c-3.17-.18-6.1-1.7-8.08-4.15l-.48-.56-.36.64c-.39.69-.62 1.48-.65 2.28.04 1.61.81 3.04 2.06 3.88l.3-.92c-.55-.02-1.11-.17-1.6-.45l-.59-.34-.14.67c-.02.08-.02.16 0 .24-.01 2.12 1.55 4.01 3.69 4.46l.1-.49-.1-.49c-.33.07-.67.12-1.03.14-.18-.02-.43-.05-.64-.07l-.76-.09.23.73c.57 1.84 2.29 3.14 4.28 3.21l-.28-.89a8.252 8.252 0 0 1-4.85 1.66c-.12-.01-.26-.02-.56-.05l-.17-.01-.18-.01L2.53 21l1.694 1.07a12.233 12.233 0 0 0 6.58 1.917c7.156 0 12.2-5.73 12.18-12.18l-.002.04z"></path></svg>
+</span></a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Ftutorials%2Fspgw-how-add-sample-header-app-okta%2F" rel="nofollow" target="_blank" title="Share on Facebook" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"><span class="facebook"><svg class="svgIcon-use" width="40" height="40" viewBox="0 0 29 29"><path d="M16.39 23.61v-5.808h1.846a.55.55 0 0 0 .546-.48l.36-2.797a.551.551 0 0 0-.547-.62H16.39V12.67c0-.67.12-.813.828-.813h1.474a.55.55 0 0 0 .55-.55V8.803a.55.55 0 0 0-.477-.545c-.436-.06-1.36-.116-2.22-.116-2.5 0-4.13 1.62-4.13 4.248v1.513H10.56a.551.551 0 0 0-.55.55v2.797c0 .304.248.55.55.55h1.855v5.76c-4.172-.96-7.215-4.7-7.215-9.1 0-5.17 4.17-9.36 9.31-9.36 5.14 0 9.31 4.19 9.31 9.36 0 4.48-3.155 8.27-7.43 9.15M14.51 4C8.76 4 4.1 8.684 4.1 14.46c0 5.162 3.75 9.523 8.778 10.32a.55.55 0 0 0 .637-.543v-6.985a.551.551 0 0 0-.55-.55H11.11v-1.697h1.855a.55.55 0 0 0 .55-.55v-2.063c0-2.02 1.136-3.148 3.03-3.148.567 0 1.156.027 1.597.06v1.453h-.924c-1.363 0-1.93.675-1.93 1.912v1.78c0 .3.247.55.55.55h2.132l-.218 1.69H15.84c-.305 0-.55.24-.55.55v7.02c0 .33.293.59.623.54 5.135-.7 9.007-5.11 9.007-10.36C24.92 8.68 20.26 4 14.51 4"></path></svg>
+</span></a>
+</div>
+</div>
+            </div>
+
+            <p class="uk-article-meta">
+              <time datetime="2018-12-10T00:00:00+05:30" itemprop="datePublished">
+                
+                Dec 10, 2018
+              </time>
+              
+              by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">ICSynergy Staff</span></span>
+            </p>
+
+            <div class="uk-margin-large-top">
+    <h3>Related Articles</h3>
+
+    
+    
+    
+
+    <ul class="uk-list uk-list-large link-icon-right">
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+        <li><a href="/tutorials/spgw-how-setup-using-ovf/">Install SPGateway using an OVF image</a></li>
+        
+        
+    
+
+    
+
+    
+    
+
+    
+
+    
+        <li><a href="/tutorials/spgw-how-register-freshdesk/">Register with the ICSynergy Freshdesk Portal</a></li>
+        
+        
+    
+
+    
+
+    
+    
+
+    
+
+    
+        <li><a href="/tutorials/spgw-how-configure-spgw-okta-inbound-saml/">Configure SPGateway with Okta Inbound SAML</a></li>
+        
+        
+    
+
+    
+
+    
+    
+
+    
+
+    
+        <li><a href="/tutorials/spgw-how-add-sample-header-app-idcs/">How to Add a Sample Header Application</a></li>
+        
+        
+            
+    </ul>
+</div>
+
+
+            
+        </article>
+
+        <script>
+            // Table of contents scroll to
+            UIkit.scroll('#markdown-toc a', {
+                duration: 400,
+                offset: 135
+            });
+        </script>
+
+    </div>
+</div>
+
+    </main>
+
+    <footer class="uk-section uk-section-muted uk-text-center uk-text-muted uk-link-muted">
+    <div class="uk-container uk-container-small">
+
+        <div>
+            <ul class="uk-subnav uk-flex-center">
+                
+                    
+                    
+                    
+                        <li><a href="/" >Help</a></li>
+                    
+                
+                    
+                    
+                    
+                        <li><a href="http://icsynergy.freshdesk.com" target="_blank" >Support</a></li>
+                    
+                
+            </ul>
+        </div>
+        <div class="uk-margin-medium">
+            <div data-uk-grid class="uk-child-width-auto uk-grid-small uk-flex-center uk-grid">
+                
+<div class="uk-first-column">
+    <a href="https://twitter.com/icsynergy" data-uk-icon="icon: twitter" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+<div>
+    <a href="https://www.facebook.com/icsynergy" data-uk-icon="icon: facebook" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+
+
+
+
+<div>
+    <a href="https://www.linkedin.com/company/icsynergy/" data-uk-icon="icon: linkedin" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+
+
+
+
+<div>
+    <a href="info@icsynergy.com" data-uk-icon="icon: mail" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+<div>
+    <a href="https://www.icsynergy.com" data-uk-icon="icon: link" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+            </div>
+        </div>
+        <div class="uk-margin-medium uk-text-small copyright">© 2021 ICSynergy International, LLC. All Rights Reserved. Various registered trademarks held by their respective owners.</div>
+
+    </div>
+</footer>
+
+
+    <div id="offcanvas" data-uk-offcanvas="flip: true; overlay: true">
+    <div class="uk-offcanvas-bar">
+
+        <button class="uk-offcanvas-close" type="button" data-uk-close></button>
+
+        <ul class="uk-nav uk-nav-default">
+            <li><a class="uk-logo uk-margin-small-bottom" href="/"></a></li>
+            
+                
+            <li><a href="http://localhost:4000/" >Help</a></li>
+            
+                
+            <li><a href="http://icsynergy.freshdesk.com" target="_blank" >Support</a></li>
+            
+        </ul>
+
+        <div class="uk-margin-small-top uk-text-center uk-text-muted uk-link-muted">
+            <div data-uk-grid class="uk-child-width-auto uk-grid-small uk-flex-center uk-grid">
+                
+<div class="uk-first-column">
+    <a href="https://twitter.com/icsynergy" data-uk-icon="icon: twitter" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+<div>
+    <a href="https://www.facebook.com/icsynergy" data-uk-icon="icon: facebook" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+
+
+
+
+<div>
+    <a href="https://www.linkedin.com/company/icsynergy/" data-uk-icon="icon: linkedin" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+
+
+
+
+<div>
+    <a href="info@icsynergy.com" data-uk-icon="icon: mail" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+<div>
+    <a href="https://www.icsynergy.com" data-uk-icon="icon: link" class="uk-icon-link uk-icon" target="_blank"></a>
+</div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+    </body>
+
+</html>

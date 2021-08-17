@@ -1,0 +1,20 @@
+= Application Attributes
+:page-layout: post
+:page-category: Administration
+
+The following options are available when adding a new attribute:
+
+image::http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-app-attributes-01.png[SPGateway app attributes]
+
+* *Send Attribute*: This option allows you to define a session attribute and choose whether to *send* or *not send* said attribute via a header or cookie. When *Enabled* the attribute will be sent as defined in the Type field. When *Disabled* the attribute will *NOT* be sent, but will still be *defined* within the application, thus allowing you to craft policies around this attribute.
+* *DataSource*: This field defines the source for the value of the attribute. The following options are available for this field: +
+** *IDP*: If this option is selected, the value of the attribute will be populated from the IDP field selected in the *Value* field.
+** *Static*: If this option is selected, the attribute is defined as static, and the value of the attribute is defined in the *Value* field.
+** *Secret*: If this option is selected, the attribute is defined as a static protected value for the attribute, and is used as a secret key by
+the application in order to trust the headers that originate from the SPGateway.
+** *OID*: If this option is selected, the OID datasource is made available in the Oracle E-Business Suite and AccessGate application templates to enable SPGateway to retrieve the Oracle GUID from OID.
+* *Type*: Determines the method for passing attributes. +
+** *Header*: Attribute will be passed in a header.
+** *Cookie*: Attribute will be passed in a cookie.
+* *Name*: Defines the name of the attribute.
+* *Value*: Defines the value of the attribute. This field also allows you to select a source from the IDP. If the *Source* is set to *IDP*, the value of the attribute will be populated from the corresponding IDP field.

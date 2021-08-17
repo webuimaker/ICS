@@ -1,0 +1,45 @@
+:imagesdir: http://support.icsynergy.com/wp-content/uploads/spgw-imgs/
+
+. In a web browser, log in to the SPGateway Admin console using your login credentials.
+. Click the *Applications* tab.
++
+image::http://support.icsynergy.com/wp-content/uploads/imgs/spgw-admin-policy-user-guide-01.png[]
++
+. Click *Add*.
++
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-how-add-app-01.png[]
++
+. Select an application type from the list available in the left section of the page, and click *Create*.
++
+NOTE: See https://docs.icsynergy.com/administration/spgw-admin-app-types.html[Application Types] for more information about the provided templates.
+
++
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-how-add-app-02.png[]
+
+== Configure the Application Settings
+
+. The *Settings* page provides options for configuring the application. Review the options and make the appropriate changes. For more information on the application settings options, see https://docs.icsynergy.com/administration/spgw-admin-app-settings.html[Application Settings].
+. Configure the application, and click *Next* to continue to the *Attribute* tab.
++
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-how-add-app-03.png[oracle app gateway add an app 04.png]
+
+
+== Configure the Application Attributes
+
+. The *Attributes* page provides a list of attributes that will be passed into the application. This page also provides the ability to add, edit, or remove any attribute. Review the default list of attributes, and click *Next*. For more information on the attribute options, see https://docs.icsynergy.com/administration/spgw-admin-app-attributes.html[Application Attributes].
++
+image:http://support.icsynergy.com/wp-content/uploads/imgs//oracle-app-gateway-add-an-app-08.png[oracle app gateway add an app 08.png]
++
+. Click *Next* to continue to the *Policies* tab.
+
+== Configure the Application Policies
+
+. The *Policies* page provides a list of protection policies (if any exist) for the application. You can create policies to protect resource URLs, create rules using regular expression, and create custom rules. For more information on policies, see
+https://docs.icsynergy.com/administration/spgw-admin-app-policies.html[Application Policies].
+. Click *Done* to finish the app installation.
++
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-how-add-app-04.png[]
++
+. Confirm that your application is displayed and *Active*.
++
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-how-add-app-05.png[]

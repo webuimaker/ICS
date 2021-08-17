@@ -1,0 +1,34 @@
+:imagesdir: http://support.icsynergy.com/wp-content/uploads/spgw-imgs/
+
+
+. In your browser, navigate to the *SPGateway Admin UI*.
+. Log in using your admin credentials provided by ICSynergy Professional Services.
++
+image::spgateway-configure-okta-as-an-idp-19.png[]
++
+. Click the *Settings* tab.
++
+image::spgateway-configure-okta-as-an-idp-20.png[]
++
+. Click the *Identity Providers* tab in the left column menu.
+. Click the *+* button, and select *OKTA*.
++
+image::spgateway-configure-okta-as-an-idp-21.png[]
++
+. Enter an app name in the *Name* field, fill out the *Okta Org URL* and *Okta API Token* fields with the value generated earlier, and click *Validate*.
++
+image::spgateway-configure-okta-as-an-idp-22.png[]
++
+. Once the Okta API Token is validated, the *Validated* button will turn green.
+. Click *Okay*.
++
+image::spgateway-configure-okta-as-an-idp-23.png[]
++
+. The *Settings* tab will now display your Okta IDP status; verify it displays a *Valid* status.
++
+image::spgateway-configure-okta-as-an-idp-24.png[]
++
+. Navigate to the *Topology* tab to test the IDP's connection.
+. Click the *Okta IDP icon* to be redirected to your Okta tenant.
++
+image::spgateway-configure-okta-as-an-idp-25.png[]

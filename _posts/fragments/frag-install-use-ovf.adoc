@@ -1,0 +1,141 @@
+:imagesdir: http://support.icsynergy.com/wp-content/uploads/spgw-imgs/
+
+== Anti-virus and Anti-spyware Verification
+
+NOTE: The OVF file has been verified through a custom scan before delivery.
+
+image::spgw-setup-using-ovf-00.png[]
+
+== Import Process
+
+=== Import to VMware Workstation Player
+
+. Open VMware Workstation Player.
+. Select *Open a Virtual Machine*.
++
+image::spgw-setup-using-ovf-01.png[]
++
+. Browse to the *ICSynergy-SPGateway* OVA file, and click *Open*.
++
+image::spgw-setup-using-ovf-02.png[]
++
+. VMWare will prompt you to accept the SPGateway License agreement. Click *I accept terms* checkbox, and click *Next*.
++
+image::spgw-setup-using-ovf-03.png[]
++
+. Enter a name for the virtual machine, and click *Import*.
++
+image::spgw-setup-using-ovf-04.png[]
++
+. VMware will start importing the OVA file.
++
+image::spgw-setup-using-ovf-05.png[]
++
+. Once the VM has imported, click *Play virtual machine* to start the VM and open a terminal.
++
+image::spgw-setup-using-ovf-06.png[]
+
+=== Import to VMware ESXi
+
+. Download and install *VMware vSphere Client* from the ESXi server.
+. Open VMware vSphere Client.
+. Enter the server name or IP address and credentials in the respective fields, and click *Login*.
++
+image::spgw-setup-using-ovf-07.png[]
++
+. In the vSphere Client window, select *File > Deploy OVF Template*.
++
+image::spgw-setup-using-ovf-08.png[]
++
+. In the *Deploy OVF Template* window, click *Browse*.
++
+image::spgw-setup-using-ovf-09.png[]
++
+. Select the *ICSynergy-SPGateway* OVA file, and click *Open*.
++
+image::spgw-setup-using-ovf-10.png[]
++
+. Click *Next*.
++
+image::spgw-setup-using-ovf-11.png[]
++
+. Review the template details provided, and click *Next*.
++
+image::spgw-setup-using-ovf-12.png[]
++
+. You will be prompted to accept the SPGateway License agreement. Click *Accept* and click *Next*.
++
+image::spgw-setup-using-ovf-13.png[]
++
+. Enter a name for the SPGateway template, and click *Next*.
++
+image::spgw-setup-using-ovf-14.png[]
++
+. On the next page, select a storage location, and click *Next*.
++
+image::spgw-setup-using-ovf-15.png[]
++
+. Select the appropriate disk format option based on your requirements, and click *Next*.
++
+image::spgw-setup-using-ovf-16.png[]
++
+. Click *Finish*.
++
+image::spgw-setup-using-ovf-17.png[]
++
+. vSphere Client will begin the deployment process.
++
+image::spgw-setup-using-ovf-18.png[]
++
+. Click *Close* in the confirmation dialog box when the deployment is complete.
++
+image::spgw-setup-using-ovf-19.png[]
++
+. In the *vSphere Client* window, click *Inventory*.
++
+image::spgw-setup-using-ovf-20.png[]
++
+. Select the *Virtual Machines* tab to display the VMs that are currently deployed to the server.
+. Select the SPGateway VM, and click *Power On* (symbolized by a green play icon) in the toolbar.
++
+image::spgw-setup-using-ovf-21.png[]
++
+. Right-click the VM, and click *Open Console* to log in to the VM.
++
+image::spgw-setup-using-ovf-22.png[]
+
+=== Import to VirtualBox
+
+. Open *VirtualBox*.
+. Select *File > Import Appliance*.
++
+image::spgw-setup-using-ovf-23.png[]
++
+. Click the folder icon to browse to the OVF file.
++
+image::spgw-setup-using-ovf-24.png[]
++
+. Select the *ICSynergy-SPGateway* OVA file, and click *Open*.
++
+image::spgw-setup-using-ovf-25.png[]
++
+. Click *Next*.
++
+image::spgw-setup-using-ovf-26.png[]
++
+. Verify the *Name* says, "SPGateway" and *Guest OS Type* is set to *Red Hat (64-bit)*.
+. Select the *Reinitialize the MAC address of all network cards* option, and click *Import*.
++
+image::spgw-setup-using-ovf-27.png[]
++
+. VirtualBox will prompt you with the SPGateway License agreement. Click *Accept*.
++
+image::spgw-setup-using-ovf-28.png[]
++
+. VirtualBox will begin the import process.
++
+image::spgw-setup-using-ovf-29.png[]
++
+. Click *Start* to start the VM.
++
+image::spgw-setup-using-ovf-30.png[]

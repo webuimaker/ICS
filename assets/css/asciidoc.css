@@ -1,0 +1,68 @@
+/* Table styling for all KB topics on the site */
+table.tableblock {
+  border: 2px;
+  border-color: rgba(28,87,111,0.2);
+  padding: 15px;
+  border-collapse: collapse;
+}
+table.tableblock td, tr {
+  border: 1px solid #ddddd8;
+  padding: 15px;
+}
+table.tableblock th {
+  background-color: rgba(28,87,111,0.2);
+  border: 1px solid #babab6;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: left;
+}
+table.tableblock tr:hover {
+  background-color: rgba(45,191,215,0.15);
+}
+
+/*Admonition Block styling for all KB topics on the site */
+span.icon>.fa {
+  cursor: default;
+}
+.admonitionblock td.icon {
+  text-align: center;
+  width: 80px;
+}
+.admonitionblock td.icon [class^="fa icon-"] {
+  font-size: 2.5em;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.5);
+  cursor: default;
+}
+.admonitionblock td.icon .icon-note:before {
+  content: "\f05a";
+  color: #19407c;
+}
+.admonitionblock td.icon .icon-tip:before {
+  content: "\f0eb";
+  text-shadow: 1px 1px 2px rgba(155,155,0,.8);
+  color: #111;
+}
+.admonitionblock td.icon .icon-warning:before {
+  content: "\f071";
+  color: #bf6900;
+}
+.admonitionblock td.icon .icon-caution:before {
+  content: "\f06d";
+  color: #bf3400;
+}
+.admonitionblock td.icon .icon-important:before {
+  content: "\f06a";
+  color: #bf0000;
+}
+.admonitionblock td.content {
+  padding-left:1.125em;
+  padding-right:1.25em;
+  border-left:1px solid #ddddd8;
+  color:rgba(0,0,0,.6);
+}
+.admonitionblock table {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}

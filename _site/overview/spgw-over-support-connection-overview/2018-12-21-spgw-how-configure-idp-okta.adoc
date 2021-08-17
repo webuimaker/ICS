@@ -1,0 +1,94 @@
+= Configure SPGateway with Okta
+:page-layout: post
+:page-category: Tutorials
+
+== Introduction
+The purpose of this tutorial is to walk you through the configuration of SPGateway with an Okta tenant as an Identity Provider. This tutorial assumes you have a SPGateway instance installed and configured as well as an Okta tenant.
+
+[NOTE]
+====
+The following is required:
+
+* Have a working SPGateway Instance
+* Have your Network Configuration settings
+* Admin login for SPGateway Web Console
+* Access to a valid Okta Administrator Account
+
+====
+
+== Create an Okta Service Account for SPGateway
+
+. In your browser, Navigate to your *Okta Org* and log in as an administrator.
++
+image::spgateway-configure-okta-as-an-idp-01.png[]
++
+
+NOTE: As a best practice, we recommend creating a specific Service Account in Okta that will be used to create the SPGateway API key. This is important because every action performed by an API key is logged under the user that created the key. In the interest of maintaining accurate logs, a dedicated SPGateway Service Account is recommended.
+
++
+. Navigate to the *Directory -> People* section.
++
+
+TIP: You can hover over the main tabs in the Okta admin console to reveal the flyout sub-menus.
+
++
+image::spgateway-configure-okta-as-an-idp-02.png[]
++
+. Click *Add Person*.
++
+image::spgateway-configure-okta-as-an-idp-03.png[]
++
+. Enter a descriptive *First name* and *Last name* for the Service Account naming fields (for example, _Service Admin_).
+. Enter a dummy email (for example, service.admin@domain.com) for the *Username* and *Primary email*.
++
+
+NOTE: As a best practice, use a dummy value for the Username and Primary email fields so that there is not interference between the Service Account and your own account in the event of a password reset request, etc. Adding your own email address to the Secondary email field ensures you can activate and maintain the Service Account.
+
++
+. Enter your valid *Administrator Email* in the *Secondary email* field.
+. Click the *Send user activation email* checkbox, and click *Save*.
++
+image::spgateway-configure-okta-as-an-idp-04.png[]
++
+. You should now see your newly created Service Account under the *Activated* people tab with a *Password reset* status.
++
+image::spgateway-configure-okta-as-an-idp-05.png[]
++
+. Navigate to the *Security -> Administrators* section.
++
+image::spgateway-configure-okta-as-an-idp-06.png[]
++
+. Click *Add Administrator*.
++
+image::spgateway-configure-okta-as-an-idp-07.png[]
++
+. Enter the name of the *Service Account* created earlier in the *Grant administrator role to* field.
+. Click the *Super Administrator* checkbox, and click *Add Administrator*.
++
+image::spgateway-configure-okta-as-an-idp-08.png[]
++
+. You should now have two *Super Administrator* accounts.
++
+image::spgateway-configure-okta-as-an-idp-09.png[]
++
+. Sign out of your *Okta Admin Account*.
++
+image::spgateway-configure-okta-as-an-idp-10.png[]
++
+. In your email, open the *Service Account Activation Email* you received from Okta, and click the *Activation* link.
++
+image::spgateway-configure-okta-as-an-idp-11.png[]
++
+. After clicking the link, you will be asked to create a password, answer a security question, and select an account security image.
++
+image::spgateway-configure-okta-as-an-idp-12.png[]
++
+image::spgateway-configure-okta-as-an-idp-13.png[]
++
+. Upon completion, log in with the new Service Account credentials.
++
+image::spgateway-configure-okta-as-an-idp-14.png[]
+
+== Create an Okta API Token
+
+include::{docdir}/./fragments/frag-config-api-okta.adoc[]

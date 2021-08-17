@@ -1,0 +1,6 @@
+{% if page.document %}
+<div><p style="font-size:17px;"><strong>Contents</strong></p></div>
+{% capture toc %}{{ page.document | tocify_asciidoc }}{% endcapture %}{% if toc != '' %}<div class="toc">
+{{ toc }}
+</div>{% endif %}
+{% endif %}

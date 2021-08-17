@@ -1,0 +1,20 @@
+= Test the Sample Header Application while Following the Logs
+:page-layout: post
+:page-category: Tutorials
+
+//screenshots verified 7-18-18 MC
+. On the local SPGateway machine, log in to the Management console using the _spgw-mgmt_ user credentials.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/spgw-sample-header-013.png[image]
++
+. Type *4* and press Enter to open the Monitor menu.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/spgw-sample-header-014.png[image]
++
+. Type *1* and press Enter to open and view the logs.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/spgw-sample-header-015.png[image]
++
+. Press Enter 10 times to create a gap before the next log events.
+. Leave this window open, switch to a browser window on your local machine, and open the SPGateway Admin console.
+. Launch the application from the *Applications* tab and continue to watch the Management console as the logs update. Logging statements for the application will appear. This information is useful for troubleshooting any issues you may encounter while using the SPGateway.

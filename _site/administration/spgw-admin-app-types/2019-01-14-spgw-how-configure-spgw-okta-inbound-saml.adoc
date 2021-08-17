@@ -1,0 +1,119 @@
+= Configure SPGateway with Okta Inbound SAML
+:page-layout: post
+:page-category: Tutorials
+
+In this tutorial, we walk through the process of configuring two Okta Orgs to function as an Identity Provider and Service Provide (respectively) that use an application in the SPGateway.
+
+== Requirements
+
+* A configured Okta Org to act as an Identity Provider (IDP) for the SPGateway (and the Service Provider (SP) for your true IDP). We will refer to this as the SP throughout the article.
+* A configured IDP to federate with your Okta Org. For the purposes of this article, we use another Okta Org. We will refer to this as the IDP throughout this article.
+* An SPGateway instance configured with the SP Okta Org.
+* A header application created in the SPGateway and assigned to the Everyone group.
+
+== Create the application in the IDP
+
+. Log in to the IDP Okta Org as an administrator, go to the *Applications* tab, and click *Add Application*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-001.jpg[image]
++
+. Click *Create New App*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-003.jpg[image]
++
+. Select *SAML 2.0*, and click *Create*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-005.jpg[image]
++
+. Give the application a name, and click *Next*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-007.jpg[image]
++
+. Complete the *Single sign on URL* and *Audience URI (SP Entity ID)* fields with dummy information, and click *Next*.
++
+TIP: We will add the correct information to these fields later.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-009.jpg[image]
++
+. Select the option *I’m an Okta customer adding an internal app*, and click *Finish*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-011.jpg[image]
++
+. On the *Sign On* tab, click *View Setup Instructions*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-013.jpg[image]
++
+. Click *Download certificate*, and leave the page open for reference.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-015.jpg[image]
+
+== Set up the IDP in the SP Org
+
+. Open a separate tab or window in your browser, log in to the SP Okta Org as an administrator, and select *Security → Identity Providers*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-017.jpg[image]
++
+. Click the *Add Identity Provider* menu, and then click *Add SAML 2.0 IDP*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-019.jpg[image]
++
+. In the IDP configuration screen, follow these steps:
++
+.. Enter a name for the IDP, such as *Okta IDP*.
+.. Select the *idpuser.subjectNameId* option in the IDP Username menu.
+.. Select the *Update attributes for existing users* option next to Profile Master.
+.. Fill in the *IDP Issuer URI* and *IDP Single Sign-On URL* values using the information from the previous section.
+.. In the *IDP Signature Certificate* field, upload the certificate that you downloaded in the previous section.
+.. Click *Add Identity Provider*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-021.jpg[image]
++
+. Leave this tab or window open for reference in the next section.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-023.jpg[image]
+
+
+== Configure App in IDP
+
+. Go back to the application in the IDP Okta Org, click the *General* tab, and click *Edit*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-025.jpg[image]
++
+. Click *Next* on the *Edit SAML Integration* page.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-027.jpg[image]
++
+. Referring to step 4 in the previous section, fill in the information for the *Single sign on URL* and *Audience URI (SP Entity ID)* fields.
+. In the Attributes Statements section, complete the fields as shown in the image below:
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-028.jpg[image]
++
+. Click *Finish*.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-030.jpg[image]
+
+== Test the Configuration
+
+. Log in to the IDP Okta Org with a test user.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-032.jpg[image]
++
+. Launch the SP Okta Org application from the dashboard. The SP Okta Org dashboard should open.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-034.jpg[image]
++
+. Launch the Header App from the dashboard.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-036.jpg[image]
++
+. Verify the information in the header application.
++
+image:https://www.icsynergy.com/wp-content/uploads/2017/spgw-assets/inbound-saml-038.jpg[image]
+
+[NOTE]
+====
+* This configuration *DOES NOT* support SP-initiated flows from the SPGateway (such as going to header.gatewaydomain.com) for a limited set of users. For users to be automatically redirected to the IDP Okta Org for authentication from the SP Okta Org, the SP Okta Org must be set up with the IDP Okta Org as the default Identity Provider. This means that every time a user goes to the SP Okta Org, they will be redirected to the IDP Okta Org. If you want the SP-initiated flow from the SPGateway to work properly, all users must authenticate at the IDP.
+* If you want to launch the header app from the IDP Okta Org, add the header app embedded URL from the SP Okta Org to the **Default Relay State** of the SP Okta Org app in the IDP Okta Org.
+* For more information on how Okta’s inbound SAML works and how to configure it, see https://support.okta.com/help/articles/Knowledge_Article/40561903-Configuring-Inbound-SAML[Configuring Inbound SAML].
+* In this lab, the users are created in the SP Okta Org using JIT provisioning and are mastered by the IDP Okta Org. To master the users in the SP Okta Org, or to remove JIT provisioning, see https://support.okta.com/help/articles/Knowledge_Article/40561903-Configuring-Inbound-SAML[Configuring Inbound SAML].
+====

@@ -1,0 +1,30 @@
+:imagesdir: http://support.icsynergy.com/wp-content/uploads/spgw-imgs/
+
+=== Determine the IP address and modify the host file
+
+To configure the SPGateway instance, you must add a line to the host file on all machines that need access to this SPGateway instance.
+
+. Log in to the SPGateway server using these credentials:
+.. *Username*: spgw-mgmt
+.. *Password*: ICSynergy@123
++
+IMPORTANT: We recommend you change the password after logging in.
++
+. Once you are logged in, the system will provide you with several menu options.
+. Enter *1* to enter the *Network* menu.
++
+image::spgw-setup-using-ovf-31.png[]
++
+. Enter *S* to display the running network configuration.
++
+image::spgw-setup-using-ovf-32.png[]
++
+. The *eth0* section on the next page shows the IP address of the server. Make note of this IP address, as it will be used later in this guide.
++
+image::spgw-setup-using-ovf-33.png[]
++
+. Keep pressing Enter until you are back to the *Network* menu.
+. Press *X* to exit the Network menu, and press *X* again to exit the UI.
+. Add a line to the host file on the machine running the VM as shown in the example below. Use the IP address you collected above.
++
+`<ipaddress of box> admin`

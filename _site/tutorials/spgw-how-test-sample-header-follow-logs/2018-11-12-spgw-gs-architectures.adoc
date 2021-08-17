@@ -1,0 +1,7 @@
+= Example Architectures
+:page-layout: post
+:page-category: Getting Started
+
+== Overview
+
+include::{frags}/frag-example-architectures.adoc[]

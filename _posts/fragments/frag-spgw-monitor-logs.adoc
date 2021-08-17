@@ -1,0 +1,20 @@
+:imagesdir: http://support.icsynergy.com/wp-content/uploads/spgw-imgs/
+//screenshots verified 7-18-18 MC
+. Start the SPGateway VM and open a terminal window. The default credentials are given below:
+.. *Username*: spgw-mgmt
+.. *Password*: Welcome@1
++
+////
+NOTE: In order to access the Management Console, you must have physical access to the SPGateway environment. You cannot SSH into the SPGateway Management Console.
+////
+NOTE: In order to access the Management Console, you must have physical access to the SPGateway environment. You cannot SSH into the SPGateway Management Console.
+
++
+. Once you are logged in, the system will provide you with several menu options.
++
+image::frag-spgw-monitor-logs-01.png[]
++
+. Press *4* on the Management Console Menu to enter the *Monitoring* menu.
+. Press *1* to access the SPGateway Log.
++
+image::frag-spgw-monitor-logs-02.png[]

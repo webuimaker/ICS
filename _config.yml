@@ -1,0 +1,115 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site title and description
+title:              Identity is Empowering Digital Transformation
+description:        A knowledge base for supporting the Identity.
+
+# Site subpath, e.g. /blog
+baseurl:            ""
+
+# Permalink URLs structure, for permalink style options see: https://jekyllrb.com/docs/permalinks/
+permalink:          /:categories/:title:output_ext
+## permalink:          /:categories/:title:output_ext  :path
+
+# Site base hostname & protocol, e.g. http://example.com
+# url:                "http://174.138.64.27"
+
+# Site staging IP location
+# host:               174.138.64.27
+
+# Site logo, dark and light depending on page hero text setting dark/light
+logo_image:
+    light:          ics.svg #logo-light.svg  # e.g. logo.png, upload logo image file to /assets/posts/ folder
+    dark:           ics.svg #logo-dark.svg  # e.g. logo.png, upload logo image file to /assets/posts/ folder
+
+# Author settings, displayed on about page
+author:
+    name:           ICSynergy Staff
+    email:          info@icsynergy.com
+    website:        https://www.icsynergy.com
+    facebook:       https://www.facebook.com/icsynergy
+    #flickr:
+    #dribbble:
+    #github:
+    #googleplus:
+    #instagram:      https://www.instagram.com/
+    linkedin:       https://www.linkedin.com/company/icsynergy/
+    #pinterest:
+    twitter:        https://twitter.com/icsynergy
+    #vimeo:          https://vimeo.com/
+    #youtube:
+
+# Social share buttons
+twitter_username:   icsynergy
+#github_username:    ivanchromjak
+
+# Default footer image settings
+footer:
+    copyright:      © 2021 ICSynergy International, LLC. All Rights Reserved. Various registered trademarks held by their respective owners.
+
+# Disqus comments shortname, requires Disqus account https://disqus.com/
+disqus:
+    shortname:      # 7865
+
+# Google analytics code, get your code here https://www.google.com/analytics/
+## google_analytics:   UA-5368856-3
+
+# Google maps API key, get your key here: https://developers.google.com/maps/documentation/javascript/get-api-key
+#google_maps_api_key:
+
+# Path to post content assets directory i.e post images, pdfs etc
+post_assets:        /assets/posts/
+
+# Build settings
+# markdown:           kramdown
+highlighter:        rouge
+
+plugins_dir:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jekyll-postfiles
+exclude:
+#  - Gemfile
+#  - Gemfile.lock
+  - node_modules
+
+sass:
+  style:            compressed
+
+collections_dir: content
+
+#collections:
+ # posts:
+  #  output: true
+   # permalink: /:path/:title:output_ext  
+
+
+collections:
+  meta:
+    output          : true
+    permalink       : "/:path/"
+  posts:
+    output          : true
+    permalink       : "/:categories/:title/"
+  documentation:
+    output          : true
+    permalink       : "/:path/"
+
+## /:categories/:title:output_ext
+
+#collections:
+#  faqs:
+#    output: false
+
+asciidoctor:
+  base_dir: :docdir
+  safe: 0
+  attributes:
+    ## imagesdir: /assets/images/
+    icons: font
+    frags: fragments

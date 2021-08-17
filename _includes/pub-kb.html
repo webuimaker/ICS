@@ -1,0 +1,9 @@
+<ul>
+	{% for kb-pub in site.kbpub %}
+	<li>
+		<h3>
+			<a href="{{ kb-pub.url }}">{{ kb-pub.title }}</a>
+		</h3>
+	</li>
+	{% endfor %}
+</ul>

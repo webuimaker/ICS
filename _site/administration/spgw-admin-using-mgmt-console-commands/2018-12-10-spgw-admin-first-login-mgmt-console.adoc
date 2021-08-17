@@ -1,0 +1,14 @@
+= First login to Management Console
+:page-layout: post
+:page-category: Administration
+
+The first time you log in to the SPGateway Management Console, we recommend that you change the password for the _spgw-mgmt_ user.
+
+NOTE: In order to access the Management Console, you must have physical access to the SPGateway environment. You cannot SSH into the SPGateway Management Console.
+
+== Log in to the SPGateway machine
+
+. From the SPGateway machine, open the terminal or console and use the credentials provided by your ICSynergy Engineer to log in with the _spgw-mgmt_ user.
+. After you log in, the main *SPGateway Administration* menu appears. Select the option *6 - Change Password* to change the default password.
+
+TIP: Refer to https://docs.icsynergy.com/administration/spgw-admin-password-policies.html[SPGateway Password Policies] for information about password requirements and security.

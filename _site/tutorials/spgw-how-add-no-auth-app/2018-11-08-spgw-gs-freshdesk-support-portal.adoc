@@ -1,0 +1,19 @@
+= ICSynergy Freshdesk Support Portal
+:page-layout: post
+:page-category: Getting Started
+
+In the event that you need to file a support request with ICSynergy regarding SPGateway, you can do so through our https://icsynergy.freshdesk.com[Freshdesk portal].
+
+== Freshdesk Accounts
+
+In order to file a support ticket, you must have an account with the Freshdesk system. To register with the ICSynergy Freshdesk portal, see http://docs.icsynergy.com/tutorials/spgw-how-register-freshdesk.html/[Register with the ICSynergy Freshdesk Portal].
+
+== Response Times
+
+We aim to respond to all support tickets as quickly as possible. Depending on the severity of the issue, the guaranteed response times vary. Please refer to your SPGateway contract and license agreement for more details on response times.
+
+== Support Process
+
+Upon receipt of your support ticket, you are notified that we received your request and have assigned it to a specific support agent. That support agent will work with you through email or phone to identify and remedy the issue. In some cases, you will be asked to enable the Support Connection to your SPGateway appliance so that the support agent can review the logs and other relevant configuration details as part of the troubleshooting process.
+
+For more information on enabling the Support Connection, see https://docs.icsynergy.com/tutorials/spgw-how-enable-disable-support-connection.html[Enable the SPGateway Support Connection].

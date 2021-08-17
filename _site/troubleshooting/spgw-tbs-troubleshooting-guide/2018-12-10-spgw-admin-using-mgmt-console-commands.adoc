@@ -1,0 +1,236 @@
+= Using the Management Console Commands
+:page-layout: post
+:page-category: Administration
+
+//links verified 7-18-18 mc
+
+The SPGateway Management Console is a command line interface to the SPGateway instance that allows you to modify several configuration options that are not available in the Admin UI Console. The steps provided in this section walk you through each Management Console command available.
+
+The following menus are available on the Management Console:
+
+* Network
+* Services
+* Kerberos
+* Monitor
+* System
+* Change Password
+* Change Web Console Password
+* Exit
+
+
+== Network
+
+The *Network* menu contains options for checking the status of the network and modifying the network settings. For more information on the *Network* menu, see https://docs.icsynergy.com/overview/spgw-over-spgw-management-console.html#network[Management Console — Network]
+
+=== Set up static networking
+
+. Press *1* to select the *Setup static networking* option.
+. Enter the IP address, and press Enter.
+. Enter the *netmask* value, and press Enter.
+. Enter the default gateway value, and press Enter.
+. Enter the primary DNS server value, and press Enter.
+. Enter the secondary DNS server value, and press Enter.
+. Enter the search domain address, and press Enter.
+. Press *c* to commit the changes.
+. Review the network configuration, and press *y* and Enter to confirm the changes. Alternatively, press *n* and Enter to discard your changes and return to the *Network* menu.
+. After the change is complete, press any key to return to the *Network* menu.
+
+=== Set up DHCP networking
+
+. Press *2* to enter the DHCP networking setup and enable DHCP.
++
+NOTE: In this option, changes are written immediately and you do not need to commit the change later. The system prompts you to confirm each change.
+
+
+. Press *y* and Enter to confirm, or press *n* and Enter to return to the *Network* menu.
+. After the network interface is restarted, press Enter to continue.
+
+
+=== Test network configuration
+
+
+. Press *3* to begin the network configuration test.
+. The system attempts a connection to www.icsynergy.com and displays the status. Press Enter to continue.
+. Next, the system attempts a connection to www.okta.com and displays the status. Press Enter to continue.
+. Finally, the system checks the NGINX configuration and displays the status. Press Enter to return to the *Network* menu.
+
+
+=== Edit the /etc/hosts file
+
+. Press *4* to edit the _/etc/hosts_ file. This shows you the current entries in the hosts file by line number.
+. Press *a* to add a new entry.
+. Add the entry following the standard format.
+. To delete an entry, press *d* and enter the line number that corresponds to the entry you want to delete.
+. Press *c* to commit the changes to the hosts file.
+. Press *x* to return to the main *Network* menu.
+
+=== Set up NIC bonding
+
+. Press *5* to set up NIC bonding.
+. Enter the IP address, and press Enter.
+. Enter the *netmask* value, and press Enter.
+. Enter the default gateway value, and press Enter.
+. Enter the primary DNS server value, and press Enter.
+. Enter the secondary DNS server value, and press Enter.
+. Enter the search domain address, and press Enter.
+. Press *c* to commit the changes.
+. Review the network configuration, and press *y* and Enter to confirm the changes. Press *n* and Enter to discard your changes and return to the *Network* menu.
+. After the change is complete, press any key to return to the *Network* menu.
+
+=== Change interface
+
+. Press *6* to change the network interface.
+. Enter the network interface that you would like to use (such as,*eth0*, *eth1*, *eth*, etc.).
+. Press Enter to return to the main *Network* menu, and confirm that the interface has changed in the *6 — Change interface [_interface name_]* menu option. The new interface should be listed in the menu option.
+
+=== Proxy Settings
+
+==== Configure a proxy
+
+. Press *7* to set up or disable a proxy connection to the internet.
+. Press *1* to configure the proxy.
+. Enter the proxy hostname, and press Enter.
+. Enter the proxy port, and press Enter.
+. Enter the hostnames (separated by commas) that need to bypass the proxy.
+. Press *y* to confirm the proxy settings.
+. Press Enter to return to the proxy menu, and press Enter again to return to the main *Network* menu.
+
+==== Unset a proxy
+
+. Press *7* to enter the proxy menu.
+. Press *2* to remove the proxy configuration.
+. Enter *y* to confirm.
+. Press Enter to return to the proxy menu, and press Enter again to return to the main *Network* menu.
+
+
+=== Ping
+
+The Ping option can be used to check if a destination host is reachable from the SPGateway appliance.
+
+. Press *8* to enter the ping menu.
+. Enter the hostname or IP address for the destination host you want to ping, and press Enter.
+. The system displays the ping results.
+. Press Enter to return to the main *Network* menu.
+
+
+=== Connectivity Test
+
+The Connectivity Test option can be used to validate a connection between the SPGateway and any other system. This tool can also be used to validate if a backend application or server is reachable from the SPGateway appliance.
+
+. Select *9* from the *Network* menu.
+. Enter the hostname or IP address of the machine you want to test, and press Enter.
+. Enter the port number that needs to be tested, and press Enter.
+. The system displays the connection results.
+. Press Enter to return to the *Network* menu.
+
+
+== Services
+
+The *Services* menu allows you to start, stop, and restart services on the SPGateway appliance, as well as check the status of the running services and regenerate an SSL certificate. The available services you can view are NGINX, SPGateway Admin, and NTP. For more information on the Services menu, see https://docs.icsynergy.com/overview/spgw-over-spgw-management-console.html#service[Management Console — Service].
+
+The *NGINX*, *SPGateway Admin*, *NTP*, and *Session Cache* menus all contain the following commands:
+
+* *Start*: This option starts the selected service.
+* *Stop*: This option stops the selected service.
+* *Restart*: This option restarts the selected service.
+* *Check status*: This option displays the current status of the selected service, such as whether the service is running or stopped.
+
+=== Regenerate SSL Certificate
+
+. Press *1* to enter the NGINX menu.
+. Press *5* in the NGINX menu.
+. A self-signed certificate already exists on the appliance, so the system will prompt you to confirm the overwrite operation for the existing certificate. Press *y* to continue.
+. Enter the domain name originally used to set up the SPGateway appliance, and press Enter.
+. Press *y* to confirm.
+. Press Enter to return to the NGINX menu.
+
+=== Update SSL Certificate
+
+. Press *6* on the *NGINX* menu to update an SSL certificate.
+. Review the certification format requirements, and press Enter to continue.
+. Enter the domain name, and press Enter.
+. Follow the directions, and press Enter when you are prepared to insert your certificate file.
+. Enter the new SSL certificate information, and press Esc when you are finished.
+. Type *:wq* and press Enter to close the window. After the certificate is validated, review and press Enter to return to the *Services* menu.
+
+== Kerberos
+
+The *Kerberos* menu allows you to list or destroy Kerberos tickets. For more information on the Kerberos menu, see https://docs.icsynergy.com/overview/spgw-over-spgw-management-console.html#kerberos[Management Console — Kerberos].
+
+. Press *3* to enter the *Kerberos* menu.
+. The Kerberos menu contains 3 options:
+.. Press *1* to list the Kerberos principal and Kerberos ticket held in a credential cache or keytab file.
+.. Press *2* to destroy a user’s active Kerberos authorization tickets by overwriting and deleting the credential cache that contains them.
+.. Press *x* to return to the Networking menu.
+
+== Monitoring
+
+The *Monitoring* menu allows you to view the SPGateway logs and control the debugging settings.
+
+. Press *4* to enter the *Monitoring* menu.
+. Press *1* to view the logs.
+. After reviewing the logs, press *Ctrl+C* to return to the *Monitoring* menu.
+. Press Enter.
+. Press *2* to enable debugging for all services, and press Enter.
+. Press *3* to disable debugging for all services, and press Enter.
+
+== System
+
+The *System* menu allows you to change the hostname of the SPGateway instance and reboot or shut down the SPGateway instance.
+
+=== Change Hostname
+
+. Press *5* to enter the System menu.
+. Press *1* in the System menu to change the hostname.
+. Enter the new hostname, and press Enter.
+. Press *y* to confirm.
+. Press Enter to return to the System menu.
+
+=== Install Package
+
+. Press 2 on the *System* menu to install a package.
+. Enter the package name, and press Enter.
+. Press y to confirm the installation of the package.
+
+=== Remove Package
+
+. Press 3 on the *System* menu to remove a package.
+. Enter the package name, and press Enter.
+. Press y to confirm the removal of the package.
+
+== Change Password
+
+The *Change Password* menu allows you to change the password for the *spgw-mgmt* user. You will be asked to confirm the current password and enter/confirm the new password to successfully change the password.
+
+Please see https://docs.icsynergy.com/administration/spgw-admin-password-policies.html[SPGateway Password Policies] for more information on acceptable passwords.
+
+. Press *6* on the main menu to change the password.
+. Enter the current password for the _spgw-mgmt_ user.
+. Enter a new password.
+. Confirm the new password.
+. The system displays a _Password reset successful_ message if the password is accepted; alternatively, an error is displayed if the password fails to meet the minimum requirements.
+. Press Enter to return to the main menu.
+
+== Change Web Console Password
+
+The *Change Web Console Password* menu allows you to change the password for the administrator on the SPGateway Admin UI. You will be asked to confirm the current password and enter/confirm the new password to successfully change the password.
+
+Please see
+https://docs.icsynergy.com/administration/spgw-admin-password-policies.html[SPGateway Password Policies] for more information on acceptable passwords.
+
+. Press *7* on the main menu to change the password.
+. Enter the current password for the admin user for the Admin UI Console.
+. Enter a new password.
+. Confirm the new password.
+. The system displays a _Password reset successful_ message if the password is accepted; alternatively, an error is displayed if the password fails to meet the minimum requirements.
+. Press Enter to return to the main menu.
+
+== Update
+
+The *Update* menu allows you to update the SPGateway appliance.
+
+include::fragments/frag-update-warning.adoc[]
+
+== Exit
+
+The *Exit* menu option exits the SPGateway Management Console to the main operating system prompt.

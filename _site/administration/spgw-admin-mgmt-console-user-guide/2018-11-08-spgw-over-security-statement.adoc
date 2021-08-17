@@ -1,0 +1,20 @@
+= Security Statement
+:page-layout: post
+:page-category: Overview
+
+The operating system that powers SPGateway is hardened and secured to ensure your systems are always safe and updated to counter modern threats. ICSynergy performs a multi-layered vulnerability assessment and risk analysis of every new release of the SPGateway virtual appliance:
+
+. *Host-level* Vulnerability Scanning and Risk Analysis: OpenVAS (Open Vulnerability Assessment System) is used to perform a system-level analysis of more than 47,000 documented vulnerabilities tied to specific software packages, versions, and patch-levels.
+. *Application-Level* Vulnerability and Risk Analysis: OWASP's "ZAP" tool (Zed Attack Proxy) is used to perform an analysis of many common web-application vulnerabilities including the OWASP Top 10 (https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project).
+. *SSL/TLS (encryption)* Configuration Verification and Risk Analysis: SSL Labs' "Server Scan" tool is used to perform a deep analysis of the SSL/TLS configuration, including enabled/disabled ciphers, certificate strength, digital signature strength, client compatibility of all browsers and mobile devices, and an analysis of any known vulnerabilities related to the configuration in conjunction with any known clients.
+
+In all the above testing layers, a completely "clean" scan and analysis is required for an SPGateway build to be certified for production use. The SPGateway, and the OS behind it, is penetration-tested and -certified with *Metasploit* and *OWASP Top Ten*, and all packages are tested against Common Vulnerabilities and Exposures (CVEs) before each release. These tests are performed on a monthly basis to determine if any new security is required. We pay close attention to high-profile CVEs to ensure we can rapidly issue a patch to our customers and prevent any known security issues.
+
+Below are some additional security details SPGateway adheres to:
+
+* We do not store _any_ credentials for external applications on SPGateway.
+* All access to SPGateway is audited.
+* TLS is enforced on all connections.
+* Sessions exist in RAM only per node with no external access.
+* Sessions are also finger-printed to negate session hijacking or application session jumping.
+* Private Keys are maintained for access to the SPGateway appliance, which can be rotated to match your own security policies.

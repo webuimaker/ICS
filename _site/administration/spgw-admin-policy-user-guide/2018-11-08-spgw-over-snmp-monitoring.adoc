@@ -1,0 +1,311 @@
+= SPGateway SNMP Monitoring
+:page-layout: post
+:page-category: Overview
+
+== Description
+Simple Network Management Protocol (SNMP) allows network administrators to query devices for various information. SPGateway allows SNMP polling to gather information directly from the appliance. Third-party network monitoring tools, such as Solarwinds or Nagios, can use SNMP to monitor certain parameters. This article will outline how to enable this feature and describe the information that can be collected.
+
+== Overview
+The following information can be polled from the appliance:
+
+* System
+** Description (.1.3.6.1.2.1.1.1.0)
+** Contact (.1.3.6.1.2.1.1.4.0)
+** Name (.1.3.6.1.2.1.1.5.0)
+** Location (.1.3.6.1.2.1.1.6.0)
+* System uptime (.1.3.6.1.2.1.25.1.1.0)
+* System load
+** 1 min average (.1.3.6.1.4.1.2021.10.1.3.1)
+** 5 min average (.1.3.6.1.4.1.2021.10.1.3.2)
+** 15 min average (.1.3.6.1.4.1.2021.10.1.3.3)
+* System disk
+** Disk path (/) (.1.3.6.1.4.1.2021.9.1.2)
+** Minimum percentage (.1.3.6.1.4.1.2021.9.1.5)
+** Total size (.1.3.6.1.4.1.2021.9.1.6)
+** Total available (.1.3.6.1.4.1.2021.9.1.7)
+** Percent used (.1.3.6.1.4.1.2021.9.1.9)
+* Swap memory
+** Total size (.1.3.6.1.4.1.2021.4.3.0)
+** Available (.1.3.6.1.4.1.2021.4.4.0)
+* Memory
+** Total installed (.1.3.6.1.4.1.2021.4.5.0)
+** Total used (.1.3.6.1.4.1.2021.4.6.0)
+** Total free (.1.3.6.1.4.1.2021.4.11.0)
+** Total shared (.1.3.6.1.4.1.2021.4.13.0)
+** Total buffered (.1.3.6.1.4.1.2021.4.14.0)
+** Total cached (.1.3.6.1.4.1.2021.4.15.0)
+* Network
+** Interface In (.1.3.6.1.2.1.31.1.1.1.6)
+** Interface Out (.1.3.6.1.2.1.31.1.1.1.10)
+* LogMatch
+** Session cache service connection (.1.3.6.1.4.1.2021.16.2.*.1)
+** Session cache service storing/update of session data (.1.3.6.1.4.1.2021.16.2.*.2)
+** Session cache service get/retrieval of session data (.1.3.6.1.4.1.2021.16.2.*.3)
+* Process Watch
+** Session cache service (.1.3.6.1.4.1.2021.2.*.1)
+** Web service (.1.3.6.1.4.1.2021.2.*.2)
+** Web preprocessor service (.1.3.6.1.4.1.2021.2.*.3)
+** Time service (.1.3.6.1.4.1.2021.2.*.4)
+** HA communication service (.1.3.6.1.4.1.2021.2.*.5)
+** Event log service (.1.3.6.1.4.1.2021.2.*.6)
+** Job scheduler service (.1.3.6.1.4.1.2021.2.*.7)
+** Event scheduler service (.1.3.6.1.4.1.2021.2.*.8)
+
+=== Standard MIBs
+SPGateway appliances support OIDs located within the subset of the following MIBs:
+
+* link:http://www.net-snmp.org/docs/mibs/ucdavis.html[UCD-SNMP-MIB as .1.3.6.1.4.1.2021]
+* link:http://www.net-snmp.org/docs/mibs/ifMIBObjects.html[IF-MIB (ifMIBObjects) as .1.3.6.1.2.1.31.1.]
+* link:http://www.net-snmp.org/docs/mibs/host.html[HOST-RESOURCES-MIB as .1.3.6.1.2.1.25.]
+* link:http://www.net-snmp.org/docs/mibs/SNMPv2-MIB.txt[SNMPv2-MIB as .1.3.6.1.2.1]
+
+These MIBs are not proprietary and, therefore, are available on most network monitoring systems.
+
+=== Proprietary MIB
+The SPGateway appliance does not contain any proprietary MIBs.
+
+== Configuration
+To enable the SNMP feature for polling information, contact Support (support@icsynergy.com) or your Professional Services representative.
+
+For security reasons, SNMP polling is only allowed to the private IP space by default. If a monitoring solution is on a public IP space, notify Support to whitelist the public IP of the monitoring solution for the appliance.
+
+== Testing
+Multiple tools exist to test SNMP functionality on various operating systems. The below information outlines the popular operating systems.
+
+=== Microsoft Windows
+Windows-based operating systems can use an open-source tool called **net-snmp**. Follow these instructions to install net-snmp and test SNMP polling to the SPGateway appliance:
+
+. link:http://sourceforge.net/projects/net-snmp/files/[Download net-snmp], and install.
+. Copy and paste the sample `snmpwalk` command from one of the sample output commands below, and place it in a command prompt.
+
+=== Linux (Debian-based)
+On a Linux-based operation system, you can install an SNMP package to achieve the same results. Follow these instructions for Debian systems:
+
+. Install `snmpd`. For systems with apt-get:
++
+`sudo apt-get install snmpd`
++
+. Copy and paste the example `snmpwalk` command from one of the sample output commands, and place it in a terminal.
+
+=== Sample Commands and Output
+Testing SNMP to any SPGateway is exactly the same process. Use snmpwalk for each individual appliance.
+
+==== Poll all available objects
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161 .1
+.1.3.6.1.2.1.1.1.0 = STRING: SPGateway Security Appliance
+.1.3.6.1.2.1.1.4.0 = STRING: ICSynergy Support (support@icsynergy.com)
+.1.3.6.1.2.1.1.5.0 = STRING: spgatewaydev (Dev node0)
+.1.3.6.1.2.1.1.6.0 = STRING: Client
+.1.3.6.1.2.1.25.1.1.0 = Timeticks: (49995062) 5 days, 18:52:30.62
+.1.3.6.1.2.1.31.1.1.1.6.1 = Counter64: 1892995
+.1.3.6.1.2.1.31.1.1.1.6.2 = Counter64: 197893019
+.1.3.6.1.2.1.31.1.1.1.6.3 = Counter64: 36135728
+.1.3.6.1.2.1.31.1.1.1.10.1 = Counter64: 1892995
+.1.3.6.1.2.1.31.1.1.1.10.2 = Counter64: 2156055
+.1.3.6.1.2.1.31.1.1.1.10.3 = Counter64: 7473976
+.1.3.6.1.4.1.2021.2.1.1.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.1.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.1.3 = INTEGER: 3
+.1.3.6.1.4.1.2021.2.1.1.4 = INTEGER: 4
+.1.3.6.1.4.1.2021.2.1.1.5 = INTEGER: 5
+.1.3.6.1.4.1.2021.2.1.1.6 = INTEGER: 6
+.1.3.6.1.4.1.2021.2.1.1.7 = INTEGER: 7
+.1.3.6.1.4.1.2021.2.1.1.8 = INTEGER: 8
+.1.3.6.1.4.1.2021.2.1.3.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.3.3 = INTEGER: 6
+.1.3.6.1.4.1.2021.2.1.3.4 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.5 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.6 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.3.7 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.8 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.2 = INTEGER: 0
+.1.3.6.1.4.1.2021.2.1.4.3 = INTEGER: 51
+.1.3.6.1.4.1.2021.2.1.4.4 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.5 = INTEGER: 4
+.1.3.6.1.4.1.2021.2.1.4.6 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.4.7 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.8 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.5.3 = INTEGER: 6
+.1.3.6.1.4.1.2021.2.1.5.4 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.5 = INTEGER: 3
+.1.3.6.1.4.1.2021.2.1.5.6 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.5.7 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.8 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.100.1 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.2 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.3 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.4 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.5 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.6 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.7 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.8 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.4.3.0 = INTEGER: 2064380 kB
+.1.3.6.1.4.1.2021.4.4.0 = INTEGER: 2058428 kB
+.1.3.6.1.4.1.2021.4.5.0 = INTEGER: 1020072 kB
+.1.3.6.1.4.1.2021.4.6.0 = INTEGER: 81040 kB
+.1.3.6.1.4.1.2021.4.11.0 = INTEGER: 2139468 kB
+.1.3.6.1.4.1.2021.4.14.0 = INTEGER: 105504 kB
+.1.3.6.1.4.1.2021.4.15.0 = INTEGER: 415860 kB
+.1.3.6.1.4.1.2021.9.1.2.1 = STRING: /
+.1.3.6.1.4.1.2021.9.1.5.1 = INTEGER: 10
+.1.3.6.1.4.1.2021.9.1.6.1 = INTEGER: 38613644
+.1.3.6.1.4.1.2021.9.1.7.1 = INTEGER: 35086828
+.1.3.6.1.4.1.2021.9.1.9.1 = INTEGER: 4
+.1.3.6.1.4.1.2021.10.1.3.1 = STRING: 0.10
+.1.3.6.1.4.1.2021.10.1.3.2 = STRING: 0.04
+.1.3.6.1.4.1.2021.10.1.3.3 = STRING: 0.05
+.1.3.6.1.4.1.2021.16.2.1.1.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.16.2.1.1.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.16.2.1.1.3 = INTEGER: 3
+.1.3.6.1.4.1.2021.16.2.1.2.1 = STRING: sessionDbConnection
+.1.3.6.1.4.1.2021.16.2.1.2.2 = STRING: sessionDbStoring
+.1.3.6.1.4.1.2021.16.2.1.2.3 = STRING: sessionDbGet
+.1.3.6.1.4.1.2021.16.2.1.5.1 = Counter32: 4
+.1.3.6.1.4.1.2021.16.2.1.5.2 = Counter32: 7
+.1.3.6.1.4.1.2021.16.2.1.5.3 = Counter32: 8
+.1.3.6.1.4.1.2021.16.2.1.7.1 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.7.2 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.7.3 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.9.1 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.9.2 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.9.3 = Counter32: 0
+----
+
+==== Poll system objects
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161
+.1.3.6.1.2.1.1.1.0 = STRING: SPGateway Security Appliance
+.1.3.6.1.2.1.1.4.0 = STRING: ICSynergy Support (support@icsynergy.com)
+.1.3.6.1.2.1.1.5.0 = STRING: spgatewaydev (Dev node0)
+.1.3.6.1.2.1.1.6.0 = STRING: Client
+.1.3.6.1.2.1.25.1.1.0 = Timeticks: (50014182) 5 days, 18:55:41.82
+.1.3.6.1.2.1.31.1.1.1.6.1 = Counter64: 1922676
+.1.3.6.1.2.1.31.1.1.1.6.2 = Counter64: 197893169
+.1.3.6.1.2.1.31.1.1.1.6.3 = Counter64: 36160598
+.1.3.6.1.2.1.31.1.1.1.10.1 = Counter64: 1922676
+.1.3.6.1.2.1.31.1.1.1.10.2 = Counter64: 2156205
+.1.3.6.1.2.1.31.1.1.1.10.3 = Counter64: 7508828
+----
+
+==== Poll disk objects
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161 .1.3.6.1.4.1.2021.9
+.1.3.6.1.4.1.2021.9.1.2.1 = STRING: /
+.1.3.6.1.4.1.2021.9.1.5.1 = INTEGER: 10
+.1.3.6.1.4.1.2021.9.1.6.1 = INTEGER: 38613644
+.1.3.6.1.4.1.2021.9.1.7.1 = INTEGER: 35086828
+.1.3.6.1.4.1.2021.9.1.9.1 = INTEGER: 4
+----
+
+==== Poll network stats
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161 .1.3.6.1.2.1.31.1
+.1.3.6.1.2.1.31.1.1.1.6.1 = Counter64: 1940730
+.1.3.6.1.2.1.31.1.1.1.6.2 = Counter64: 197893469
+.1.3.6.1.2.1.31.1.1.1.6.3 = Counter64: 36218112
+.1.3.6.1.2.1.31.1.1.1.10.1 = Counter64: 1940730
+.1.3.6.1.2.1.31.1.1.1.10.2 = Counter64: 2156505
+.1.3.6.1.2.1.31.1.1.1.10.3 = Counter64: 7615666
+----
+
+==== Poll load objects
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161 .1.3.6.1.4.1.2021.10
+.1.3.6.1.4.1.2021.10.1.3.1 = STRING: 0.03
+.1.3.6.1.4.1.2021.10.1.3.2 = STRING: 0.08
+.1.3.6.1.4.1.2021.10.1.3.3 = STRING: 0.07
+----
+
+==== Poll memory objects
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161 .1.3.6.1.4.1.2021.4
+.1.3.6.1.4.1.2021.4.3.0 = INTEGER: 2064380 kB
+.1.3.6.1.4.1.2021.4.4.0 = INTEGER: 2058428 kB
+.1.3.6.1.4.1.2021.4.5.0 = INTEGER: 1020072 kB
+.1.3.6.1.4.1.2021.4.6.0 = INTEGER: 80916 kB
+.1.3.6.1.4.1.2021.4.11.0 = INTEGER: 2139344 kB
+.1.3.6.1.4.1.2021.4.14.0 = INTEGER: 105608 kB
+.1.3.6.1.4.1.2021.4.15.0 = INTEGER: 415916 kB
+----
+
+==== Poll session cache logwatch objects
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161 .1.3.6.1.4.1.2021.16.2
+.1.3.6.1.4.1.2021.16.2.1.1.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.16.2.1.1.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.16.2.1.1.3 = INTEGER: 3
+.1.3.6.1.4.1.2021.16.2.1.2.1 = STRING: sessionDbConnection
+.1.3.6.1.4.1.2021.16.2.1.2.2 = STRING: sessionDbStoring
+.1.3.6.1.4.1.2021.16.2.1.2.3 = STRING: sessionDbGet
+.1.3.6.1.4.1.2021.16.2.1.5.1 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.5.2 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.5.3 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.7.1 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.7.2 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.7.3 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.9.1 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.9.2 = Counter32: 0
+.1.3.6.1.4.1.2021.16.2.1.9.3 = Counter32: 0
+----
+
+==== Poll process objects
+
+----
+$ snmpwalk -O n -v2c -c spgateway localhost:161 .1.3.6.1.4.1.2021.2
+.1.3.6.1.4.1.2021.2.1.1.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.1.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.1.3 = INTEGER: 3
+.1.3.6.1.4.1.2021.2.1.1.4 = INTEGER: 4
+.1.3.6.1.4.1.2021.2.1.1.5 = INTEGER: 5
+.1.3.6.1.4.1.2021.2.1.1.6 = INTEGER: 6
+.1.3.6.1.4.1.2021.2.1.1.7 = INTEGER: 7
+.1.3.6.1.4.1.2021.2.1.1.8 = INTEGER: 8
+.1.3.6.1.4.1.2021.2.1.3.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.3.3 = INTEGER: 6
+.1.3.6.1.4.1.2021.2.1.3.4 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.5 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.6 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.3.7 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.3.8 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.2 = INTEGER: 0
+.1.3.6.1.4.1.2021.2.1.4.3 = INTEGER: 51
+.1.3.6.1.4.1.2021.2.1.4.4 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.5 = INTEGER: 4
+.1.3.6.1.4.1.2021.2.1.4.6 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.4.7 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.4.8 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.1 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.2 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.5.3 = INTEGER: 6
+.1.3.6.1.4.1.2021.2.1.5.4 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.5 = INTEGER: 3
+.1.3.6.1.4.1.2021.2.1.5.6 = INTEGER: 2
+.1.3.6.1.4.1.2021.2.1.5.7 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.5.8 = INTEGER: 1
+.1.3.6.1.4.1.2021.2.1.100.1 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.2 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.3 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.4 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.5 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.6 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.7 = INTEGER: noError(0)
+.1.3.6.1.4.1.2021.2.1.100.8 = INTEGER: noError(0)
+----
+
+Keep in mind that the `snmpwalk` command needs to be modified based on the version of SNMP that was configured. In the example above, SNMP v2c is being used, with a community string of `spgateway`, and the port has been left at the default 161.
+
+After verifying that SNMP is functioning properly, the network management system (NMS) can be configured to poll the SPGateway appliance. Consult your NMS documentation for configuration steps to add a new managed device.

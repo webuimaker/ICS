@@ -1,0 +1,112 @@
+= Configure SPGateway with IDCS as an Identity Provider
+:page-layout: post
+:page-category: Tutorials
+
+== Introduction
+The purpose of this tutorial is to walk you through the configuration of SPGateway with an IDCS tenant as an Identity Provider. This lab assumes you have a SPGateway instance installed and configured as well as an IDCS tenant.
+
+
+[NOTE]
+====
+The following is required:
+
+* Have a working SPGateway Instance
+* Have your Network Configuration settings
+* Admin login for SPGateway Web Console
+* Access to a valid IDCS Administrator Account
+====
+
+
+== Get IDCS Client ID and Secret
+
+. In your browser, navigate to your *IDCS tenant* and log in with an administrator account.
+. Click the *Application Cloud* under the *Applications* menu.
++
+image::spgateway-configure-idcs-as-an-idp-01.png[]
++
+. Click *+Add* to add a new application.
++
+image::spgateway-configure-idcs-as-an-idp-02.png[]
++
+. Select the *Trusted Application* type.
++
+image::spgateway-configure-idcs-as-an-idp-03.png[]
++
+. Enter an *Application Name*, and click *Next*.
++
+image::spgateway-configure-idcs-as-an-idp-04.png[]
++
+. In the *Client* section, select *Configure this application as a client now*.
+. Click *Next*
++
+image::spgateway-configure-idcs-as-an-idp-05.png[]
++
+. In the *Authorization* sub-section, select the *Client Credentials*, *Refresh Token*, and *Authorization Code* grant types.
+. Enter your *SPGW Hostname* as the *Redirect URL* value.
+. Select the *Grant the client access to Identity Cloud Service Admin APIs* option, and enter *Applications Administrator* into the value field.
+. Click *Next*.
++
+image::spgateway-configure-idcs-as-an-idp-06.png[]
++
+. Select *Skip for later*, and click *Next*.
++
+image::spgateway-configure-idcs-as-an-idp-07.png[]
++
+. Click *Finish*.
++
+image::spgateway-configure-idcs-as-an-idp-08.png[]
++
+. Copy the *Client ID* and *Client Secret* values in a secure location.
++
+image::spgateway-configure-idcs-as-an-idp-09.png[]
++
+
+WARNING: Please ensure you copy the token to a safe, secure location (such as a password manager or secure note database) for future reference.
+
++
+. Click *Activate* to activate the new application.
++
+image::spgateway-configure-idcs-as-an-idp-10.png[]
++
+. Click *Activate Application* to confirm the activation.
++
+image::spgateway-configure-idcs-as-an-idp-11.png[]
++
+. Verify that SPGateway has been added to the IDCS Applications list.
++
+image::spgateway-configure-idcs-as-an-idp-12.png[]
+
+== Configure SPGateway with Oracle IDCS
+
+. In your browser, navigate to your *SPGateway Admin UI*.
+. Log in using your admin credentials provided by ICSynergy Professional Services.
++
+image::spgateway-configure-idcs-as-an-idp-13.png[]
++
+. Click the *Settings* tab.
++
+image::spgateway-configure-idcs-as-an-idp-14.png[]
++
+. Click the *Identity Providers* tab in the left column menu.
+. Click the *+* button, and select *IDCS*.
++
+image::spgateway-configure-idcs-as-an-idp-15.png[]
++
+. Enter an app name in the *Name* field, and enter your *IDCS Instance URL* for the *Host* field.
++
+image::spgateway-configure-idcs-as-an-idp-16.png[]
++
+. Enter the *Client ID* and *Client Secret* values generated earlier, and click *Validate*.
+. Once the *Client Secret* is validated, the *Validated* button will turn green.
+. Click *Okay* to continue.
++
+image::spgateway-configure-idcs-as-an-idp-17.png[]
++
+. The *Settings* tab will now display your IDCS IDP status; verify it displays a *Valid* status.
+. Navigate to the *Topology* tab to test the IDP's connection
++
+image::spgateway-configure-idcs-as-an-idp-18.png[]
++
+. Click the *IDCS IDP icon* to be redirected to your IDCS tenant.
++
+image::spgateway-configure-idcs-as-an-idp-19.png[]

@@ -1,0 +1,7 @@
+# Categories home page navigation
+
+- heading: Browse All Topics
+  categories:
+    - title: Getting Started
+      desc: New to SPGateway? Start here!
+      icon: bolt

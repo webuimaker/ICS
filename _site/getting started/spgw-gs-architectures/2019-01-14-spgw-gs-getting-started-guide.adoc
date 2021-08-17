@@ -1,0 +1,72 @@
+= Getting Started Guide
+:page-layout: post
+:page-category: Getting Started
+
+This guide is an overview of everything you need to get started in SPGateway.
+
+== Install SPGateway Using an OVF Image
+Use the following steps to install SPGateway using an OVF image.
+
+include::{frags}/frag-install-use-ovf.adoc[]
+
+=== Configure SPGateway
+
+include::{frags}/frag-set-up-spgateway-ovf.adoc[]
+
+== Example Architectures
+
+include::{frags}/frag-example-architectures.adoc[]
+
+//= Basic UI Setup
+
+include::{frags}/frag-basic-ui-setup.adoc[]
+
+== Configure IDP in SPGateway
+
+include::{frags}/frag-configure-idp-in-gateway.adoc[]
+
+== Add Sample Header Application
+This section walks you through the process of setting up a sample header application with Oracle IDCS through the SPGateway Admin console.
+
+=== Create the Application in SPGateway
+
+include::{frags}/frag-add-and-test-sample-header-app.adoc[]
+
+. Select the *SPGW Sample IDCS Header App* option from the left column menu, and click *Create*.
++
+image::spgateway-sample-header-app-idcs-05.png[]
+
+=== Configure the Header Application Settings
+include::{frags}/frag-add-sample-header-app.adoc[]
+
+== Add an Application
+This section walks you through the process of setting up a sample header application with Oracle IDP through the SPGateway Admin console.
+
+[NOTE]
+====
+The following are prerequisites:
+
+* Admin login for SPGateway Admin console
+* SPGateway appliance configured with Oracle IDCS tenant
+* Access to local hosts file
+====
+
+=== Create an Application in SPGateway
+include::{frags}/frag-create-app-spgateway.adoc[]
+
+
+== Add a no-auth app to SPGateway
+This section walks you through the process of setting up a no-auth application through the SPGateway Admin Console.
+
+The purpose of this tutorial is to walk you through the process of setting up a no-auth application through the SPGateway Admin Console.
+
+[NOTE]
+====
+The following are prerequisites:
+
+* Admin login for SPGateway Admin console
+* SPGateway appliance configured with an Identity Provider
+====
+
+=== Create the No-auth Application in SPGateway
+include::{frags}/frag-add-no-auth-app.adoc[]

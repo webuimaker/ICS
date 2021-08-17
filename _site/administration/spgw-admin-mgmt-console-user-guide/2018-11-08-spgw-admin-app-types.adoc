@@ -1,0 +1,42 @@
+= Application Types
+:page-layout: post
+:page-category: Administration
+
+== Introduction
+
+When creating an application configuration in SPGateway, there are numerous application templates available to expedite the configuration process. The different application templates are described here for reference.
+
+== Application Types
+
+[cols=",,",options="header",]
+|===
+|Application type |Description |Configuration details
+|SPGW Sample Header |Out-of-the-box SPGateway header web application
+type with IDP attributes |This configuration is best used to demonstrate passing IDP data as headers to an application. This sample application will print out all the headers passed to it.
+
+|Header Based |A header web application type |This configuration is best used for applications that do not require specific settings. SPGateway will provide SSO via HTTP headers to this application.
+
+|No-auth |No Authentication Application |The no-auth configuration enables an application to be reverse-proxied by SPGateway without any authentication. This is configuration is best used when exposing internal applications to the Internet.
+
+|Oracle Access Gateway |Oracle Access Gateway application type |The OAG app enables SPGateway to SSO with Oracle E-Business applications. By default, this application will pass the USER_NAME and USER_ORCLGUID headers to the Oracle Access Gateway. Access Gateway must already be configured to enable SSO. Please contact Oracle for assistance with Access Gateway SSO configuration.
+
+|Oracle Agile PLM |Out-of-the-box SPGateway Agile PLM application type |The Oracle Agile PLM app enables SPGateway to SSO with Agile PLM applications. By default this application will pass the REMOTE-USER header to the Agile PLM. Please contact Oracle for assistance with Agile PLM SSO configuration.
+
+|Oracle BI Enterprise Edition |Out-of-the-box SPGateway OBIEE application type |The OBIEE app enables SPGateway to SSO with Oracle Business Intelligence Enterprise Edition applications. By default, this application will pass the OAM_REMOTE_USER header to the OBIEE. Please contact Oracle for assistance with OBIEE SSO configuration.
+
+|Oracle EBS R12.1 |Oracle E-Business Suite R12.1 |The EBS configuration enables SPGateway to SSO with Oracle E-Business applications. By default this application will pass the USER_NAME and USER_ORCLGUID headers to the Oracle AccessGate and EBS application. E-Business Suite must be configured to enable SSO. Please contact Oracle for assistance with E-Business SSO configuration.
+
+|Oracle EBS R12.2 |Oracle E-Business Suite R12.2 |The EBS configuration enables SPGateway to SSO with Oracle E-Business applications. By default, this application will pass the USER_NAME and USER_ORCLGUID headers to the Oracle AccessGate and EBS application. E-Business Suite must be configured to enable SSO. Please contact Oracle for assistance with E-Business SSO configuration.
+
+|Oracle Hyperion |Oracle Hyperion Application |The Hyperion configuration enables SPGateway to SSO with Oracle Hyperion applications. By default, this application will pass the HYPLOGIN header to the Hyperion application. Hyperion must already be configured to enable SSO. Please contact Oracle for assistance with Hyperion SSO configuration.
+
+|Oracle JD Edwards EnterpriseOne |Out-of-the-box SPGateway JD Edwards application type |The Oracle JD Edwards app enables SPGateway to SSO with JD Edwards applications. By default, this application will pass the JDE_SSO_UID header to the JD Edwards. Please contact Oracle for assistance with Agile PLM SSO configuration.
+
+|Oracle PeopleSoft |PeopleSoft Application |The PeopleSoft configuration enables SPGateway to SSO with Oracle PeopleSoft applications. By default, this application will pass the PSUSER header to the PeopleSoft application. PeopleSoft must already be configured to enable SSO. Please contact Oracle for assistance with PeopleSoft SSO configuration.
+
+|Oracle WebCenter |Out of the Box SPGateway WebCenter application type |The Oracle WebCenter app enables SPGateway to SSO with WebCenter applications. By default, this application will pass the OAM_REMOTE_USER header to the WebCenter. Please contact Oracle for assistance with WebCenter SSO configuration.
+
+|Oracle WebLogic |Out-of-the-box SPGateway WebLogic application type |The Oracle WebLogic app enables SPGateway to SSO with WebLogic applications. By default, this application will pass the OAM_REMOTE_USER header to the WebLogic. Please contact Oracle for assistance with WebLogic SSO configuration.
+
+|Qlik |Qlik business analytics Application |The SPGateway Qlik configuration will enable header based SSO with Qlik. Please consult the SPGateway helpdesk article or your QlikView document to enable header-based authentication. Once Qlik is configured, this SPGateway application must be configured to pass the appropriately-named header to Qlik for SSO.
+|===

@@ -1,0 +1,1 @@
+IMPORTANT: The update process requires a restart of services and downtime. It is recommended that you take a snapshot of the image before proceeding, and that you also schedule a maintenance window prior to initiating the update.

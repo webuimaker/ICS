@@ -1,0 +1,385 @@
+= SPGateway Policy User Guide
+:page-layout: post
+:page-category: Administration
+
+:imagesdir: http://support.icsynergy.com/wp-content/uploads/imgs
+
+== Introduction
+
+The purpose of this guide is to walk through the process of configuring and adjusting SPGateway Application Policies.
+
+== Policies
+
+The SPGateway includes the ability to configure one or more access policies per application. Policies are applied to URI resources within an application and can be set to achieve the following:
+
+* Allow access to an application after any user authentication (default)
+* Allow no authentication access (to anyone) to an application
+* Allow specific user(s) access to an application
+* Allow specific group(s) access to an application
+* Allow access to an application based on any IDP user profile attribute
+* Allow granular access based on an application URI(s) or deep link(s)
+
+With built-in regular expression matching, the SPGateway has the ability to enforce policies against IDP user profile attributes or external variables (e.g., Remote_IP).
+
+=== Policy Composition
+==== Resources
+
+Policies are meant to protect resources, and resources are typically defined as application URIs. The SPGateway resources can use patterns to match dynamic or expressive application URIs, and can be refined further to identify matching semantics.
+
+The SPGateway uses location matching to provide resource matching. It is implemented using the following logic:
+
+----
+location <URL matching pattern>{
+    #rule comment
+    <policy rule>'REGEX'(Against Session Data);
+    }
+----
+
+TIP: For more information see, http://nginx.org/en/docs/http/ngx_http_core_module.html#location"[NGINX Module Guide].
+
+==== Session Data
+
+The SPGateway generates a server-side session after authenticating a user. The session is transitory and will only last for the duration of the user's session. The session holds key/value pairs. These pairs typically originate from the IDP Repository. This session data is used to match (Regex) against when constructing the allow rules.
+
+----
+Example Session:
+'UserName=test.user@domain.com RemoteIP=68.203.82.29 RelayDomain=app1.spgwdev.2.domain.com firstName=Test lastName=User department=123 Groups=Test  Group:Test Admin  Group:Test Authorizer Group:Everyone:'
+----
+
+[NOTE]
+====
+* The result of each policy is audited and can be viewed in the SPGateway Management Console https://docs.icsynergy.com/administration/spgw-admin-using-mgmt-console-commands.html#monitoring[Monitoring Menu].
+* For more information on *REGEX* or to test/compare policy expression against session data, use the https://regex101.com/[Regex Expression Tool].
+====
+
+
+==== Policy Rules
+
+The SPGateway uses Perl-Compatible Regular Expressions (PCRE) for the Protected Rules.
+
+[cols=",",options="header",]
+|===
+|Rule |Description
+|Protected |The SPGateway requires an authenticated user session.
+|Not Protected |The SPGateway will not enforce a user session.
+|Protected Rule |The SPGateway will require a user session. Regex will match against session data. If the REGEX 'finds' your expression, the SPGateway will allow or deny access to the location.
+|===
+
+TIP: For more information reference the https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions[Perl-Compatible Regular Expression Guide].
+
+
+=== Policy Configuration
+
+SPGateway Policies are configured using the Admin UI Console. In order to configure a policy, please ensure the following prerequisites have been met.
+
+[NOTE]
+====
+The following are prerequisites:
+
+* Admin login for SPGateway Admin Console.
+* SPGateway appliance configured with Oracle IDP tenant.
+* SPGateway Sample Header App installed on Gateway tenant.
+====
+
+. To configure a policy, log in to the SPGateway Admin UI Console.
+. Click the *Applications* tab.
++
+image::spgw-admin-policy-user-guide-01.png[]
++
+. Click the pencil icon to edit the SPGateway Sample Header application.
++
+image::spgw-admin-policy-user-guide-02.png[]
++
+NOTE: In the *Settings* menu, you can control key aspects of the SPGW Sample Header Application, many of which will further help you define your policy parameters. These include Public Domain address, Post Login URL, Groups, Session duration, deep linking, and so on.
++
+. Click *Next* to continue.
++
+image::spgw-admin-policy-user-guide-03.png[]
+
+NOTE: In the *Attributes* menu, you assign attributes to applications that further enable authentication and the sharing of data between the Gateway and your IDP tenant. Attributes can either be sourced from IDP or statically defined.
+
+
+
+image::spgw-admin-policy-user-guide-04.png[]
+
+. Click *Next* to continue.
++
+NOTE: In the *Policies* menu, you can add, edit, define, or delete polices.
+
++
+image::spgw-admin-policy-user-guide-05.png[]
+
+=== Policy Types
+==== Protected Policy
+
+A *Protected Policy* will enforce the existence of a valid SPGateway application session before allowing access to users. Unless otherwise specified by a more exclusive policy, all application resources will be subject to this policy.
+
+image::spgw-admin-policy-user-guide-06.png[]
+
+==== Not Protected Policy
+
+A *Not Protected Policy* will not enforce the existence of a valid SPGateway application session. This policy type is typically reserved for anonymous pages that require a user's identification or are trusted for public consumption.
+
+image::spgw-admin-policy-user-guide-07.png[]
+
+==== Protected Rule Policy
+
+A *Protected Rule Policy* extends the behavior of a Protected Policy and enables you to more granularly define the access rules (allow or deny) for specific resources. This policy type will evaluate the attributes you define in the *Attributes* menu of the application. Typically, these attributes will be sourced from your IDP tenant, so it's important to understand which user profile data should be used for these rules. These 'rules' are PCRE-based regular expression; for more information, see the <<Policy Rules>> section.
+
+image::spgw-admin-policy-user-guide-08.png[]
+
+=== General Configuration
+
+The following sections will provide details for configuring the different policy access rules. The access rules shown below are configurable through the *Policy Application Editor* as described in the <<Policy Configuration>> section.
+
+The following example will reference the input fields as shown below:
+
+image::spgw-admin-policy-user-guide-06.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected or Not Protected
+|*Name* |A unique name for the policy
+|*Resource Path* |The resource path to the resource you will to be managed by this policy
+|*Description* |An admin friendly description to help describe the policy, for future reference
+|===
+
+image::spgw-admin-policy-user-guide-08.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Name* |A unique name for the policy
+|*Resource Path* |The resource path to the resource you will to be managed by this policy
+|*Resource Matching Rule* |This field will allow you to define the regular expression for the policy
+|*Description* |An admin friendly description to help describe the policy, for future reference
+|===
+
+==== Allow any authenticated user access
+
+The default rule of all protected applications is set to allow any authenticated user. When enabled, the following policy allows any authenticated user to the URL `/`.
+
+image::oracle-app-gateway-policy-user-guide-11.png[]
+
+[cols=",",options="header",]
+|===
+|Field | Value
+|*Resource Rule*| Protected
+|*Resource Path*| /
+|===
+
+==== Allow any authenticated user in the IDP Everyone Group access
+
+If many policies are being configured for an application and a deep link needs to use the default authentication behavior, configure the policy to allow the *Everyone* group.
+
+image::oracle-app-gateway-policy-user-guide-12.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri1
+|*Resource Matching Rule* |Groups=(?=.*Everyone:)
+|===
+
+==== Allow no authentication access
+
+If there is a URL that needs to be accessed by anyone regardless of authentication, set the Resource Rule to *Not Protected*.
+
+image::oracle-app-gateway-policy-user-guide-13.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Not Protected
+|*Resource Path* |/public
+|===
+
+==== Allow specific user(s) access
+
+If there is a URL that needs to be accessed by a specific user, set the Matching Rule Regex to the username to allow for the policy. The following example is set to allow the user *admin@domain.com* access to the URL `/uri2`.
+
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-policy-user-guide-01.jpg[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri2
+|*Resource Matching Rule* |UserName=admin@domain.com
+|===
+
+If you need to allow multiple users, use the pipe (`|`) character to separate the username. The following example expands on the previous one to allow both *admin@domain.com* and *test@domain.com*.
+
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-policy-user-guide-05.jpg[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri2
+|*Resource Matching Rule* |UserName=admin@domain.com \| test@domain.com
+|===
+
+==== Allow specific groups(s) access
+
+If there is a URI that needs to be accessed by a specific group, set the Matching Rule Regex to the group name to allow for the policy. The following example sets the Matching Rule option to allow the Group: *Admins* to access to the URI `/uri3`.
+
+image::oracle-app-gateway-policy-user-guide-16.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri3
+|*Resource Matching Rule* |Groups=(?=.*Admins:)
+|===
+
+If you need to allow the option of multiple groups use the pipe (`|`) character to separate them. This is an *OR* condition. The following example will allow Group: Admins OR Group: Test Users.
+
+image::oracle-app-gateway-policy-user-guide-17.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri3
+|*Resource Matching Rule* |Groups=(?=.*Admins:)\|(?=.*Test Users:)
+|===
+
+If you require multiple groups, this is an *AND* condition. The following example will allow Group: Admin AND Group: Test Users.
+
+image::oracle-app-gateway-policy-user-guide-18.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri3
+|*Resource Matching Rule* |Groups=(?=.*Admins:)(?=.*Test Users:)
+|===
+
+==== Allow specific group(s) and user(s) access (multiple matches)
+
+If there is a URI that needs to be accessed by a specific group and user, set the Matching Rule Regex to the group name to allow for the policy. The following example sets the Matching Rule option to allow the Group: Admin AND User: test@domain.com.
+
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-policy-user-guide-03.jpg[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri3
+|*Resource Matching Rule* |Groups=(?=.*Admins:)(?=.*test@domain.com)
+|===
+
+==== Deny specific group(s) or user(s) access
+
+If there is a URI that needs to be accessed by everyone except a certain group, set the Matching Rule Regex to the group name and allow for the policy. The following example sets the Matching Rule option to allow users in any group except the those in Group: Group3.
+
+image::oracle-app-gateway-policy-user-guide-20.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri3
+|*Resource Matching Rule* |Groups=(?!*Group3:)
+|===
+
+The following example expands on our previous example, setting the Matching Rule option to multiple constraints. If Group: Group3 contains anyone with the UserName= test@domain.com, they will not be allowed to access the URI.
+
+image:http://support.icsynergy.com/wp-content/uploads/spgw-imgs/spgw-policy-user-guide-04.jpg[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri3
+|*Resource Matching Rule* |(?=.*Groups=.*Group3:)(?=.*UserName=(?!test@domain.com))
+|===
+
+==== Allow or Deny specific RemoteIP access
+
+If there is a URI that you would like to only be accessed by a specific RemoteIP, set the Matching Rule Regex to the RemoteIP to allow for the policy. The following example sets the Matching Rule option to allow the RemoteIP address 192.168.10.189 access.
+
+image::oracle-app-gateway-policy-user-guide-22.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri4
+|*Resource Matching Rule* |RemoteIP=(?=192\.168\.10\.189)
+|===
+
+The following example expands on our previous example, setting the Matching Rule option to allow a range of RemoteIPs. The following example sets the Matching Rule option to allow RemoteIPs within the range of 192.168.10.200 to 192.168.10.250.
+
+image::oracle-app-gateway-policy-user-guide-23.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri4
+|*Resource Matching Rule* |RemoteIP=(?=192\.168\.10\.2([0-4][0-9])|50)
+|===
+
+If there is a URI that you would like to deny access to by a specific RemoteIP set the Matching Rule Regex to the RemoteIP to deny for the policy. The following example sets the Matching Rule option to deny the RemoteIP Address 192.168.10.209 access.
+
+image::oracle-app-gateway-policy-user-guide-24.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri4
+|*Resource Matching Rule* |RemoteIP=(?!192\.168\.10\.209)
+|===
+
+The following example expands on our previous example, setting the Matching Rule option to deny a range of RemoteIPs. The following example sets the Matching Rule option to deny RemoteIPs within the range of 192.168.10.100 to 192.168.10.200.
+
+image::oracle-app-gateway-policy-user-guide-25.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri4
+|*Resource Matching Rule* |RemoteIP=(?!192\.168\.10\.(1([0-9][0-9])|200))
+|===
+
+==== Allow or Deny specific USER_AGENT access
+
+If there is a URI that you would like to only be accessed by a specific USER_AGENT (browser) set the Matching Rule Regex to the USER_AGENT to allow for the policy. The following example sets the Matching Rule option to allow the USER_AGENT to only access the URI via Google Chrome.
+
+image::oracle-app-gateway-policy-user-guide-26.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri5
+|*Resource Matching Rule* |USER_AGENT=(?=.*Chrome)
+|===
+
+The following example expands on our previous example, instead setting the Matching Rule option to deny USER_AGENT access to Google Chrome forcing access via another agent (browser).
+
+image::oracle-app-gateway-policy-user-guide-27.png[]
+
+[cols=",",options="header",]
+|===
+|Field |Value
+|*Resource Rule* |Protected Rule
+|*Resource Path* |/uri5
+|*Resource Matching Rule* |USER_AGENT=(?!.*Chrome)
+|===
+
+*See also*:
+
+//link will need to be updated - CMC
+// link updated MC
+
+* link:https://docs.icsynergy.com/tutorials/spgw-how-add-app-spgw.html[Add an Application to the SPGateway]

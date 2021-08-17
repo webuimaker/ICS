@@ -1,0 +1,15 @@
+.HTTP Status Codes
+[width="80%", cols="1,5", options="header"]
+|===
+|Status Code |Description
+|200 |Successful response
+|400 |Application is being called using IP address or the hostname is not being served by SPGateway
+|401 |Session does not exist
+|403 |SPGateway policy rule denied access to resource
+|404 |Unknown page, content, or resource
+|405 |Session integrity failure
+|500 |Server-side error
+|502 |Backend application is not available
+|503 |Application is in maintenance, inactive, or offline mode
+|504 |Request to backend application timed out
+|===
