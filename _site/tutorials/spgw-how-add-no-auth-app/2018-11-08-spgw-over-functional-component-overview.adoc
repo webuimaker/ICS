@@ -1,5 +1,0 @@
-= SPGateway Functional Components Overview
-:page-layout: post
-:page-category: Overview
-
-image::https://www.icsynergy.com/wp-content/uploads/2017/02/spgw-components.jpg[SPGateway functional components overview]

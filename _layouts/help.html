@@ -79,7 +79,7 @@ function showContainer(id) {
     </div>
 </div>
 
-<div class="uk-section uk-section-large uk-background-muted" >
+<div class="uk-section uk-section-large uk-background-muted" style="display: none;" >
     <div class="uk-container">
         {% for section in site.data.navigation_categories %}
             {% if section.heading %}
@@ -108,7 +108,7 @@ function showContainer(id) {
     </div>
 </div>
 
-<div class="uk-section uk-section-large uk-section-default">
+<div class="uk-section uk-section-large uk-section-default" style="display: none;">
     <div class="uk-container uk-container-small">
 
         <div class="uk-article-content">{{ content }}</div>

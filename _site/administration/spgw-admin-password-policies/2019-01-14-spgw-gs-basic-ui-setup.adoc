@@ -1,5 +1,0 @@
-= SPGateway Basic UI Setup
-:page-layout: post
-:page-category: Getting Started
-
-include::{frags}/frag-set-up-spgateway.adoc[]

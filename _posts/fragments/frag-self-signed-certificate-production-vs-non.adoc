@@ -1,4 +1,0 @@
-
-//testing a fragment within a fragment with this. CMC 11/28
-
-NOTE: SPGateway creates a default self-signed certificate. For non-production deployments, this will be appropriate. Proceed past any security exceptions raised by your browser. For production deployments, a valid certificate can be installed and these exceptions are not be needed.
